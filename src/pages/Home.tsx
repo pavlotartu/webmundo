@@ -1,13 +1,9 @@
 import Navbar from '../components/Navbar';
-import Search from '../components/Search';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
 
 function Home() {
   return (
     <div>
       <Navbar />
-      <Search />
 
       <div className="container">
         <h1>Bienvenido a mi sitio web</h1>
