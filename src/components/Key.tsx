@@ -3,34 +3,38 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 
 const firebaseConfig = {
-/*  aqui las credenciales */
+
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export interface Article {
-  id: string;
-  image: string;
-  name: string;
-  price: number;
+    id: string;
+    image: string;
+    name: string;
+    price: number;
+    category?: string;
 }
 
 export const getArticlesData = async () => {
-  const querySnapshot = await getDocs(collection(db, "articles"));
-  const articlesData: Article[] = [];
+    const querySnapshot = await getDocs(collection(db, "articles"));
+    const articlesData: Article[] = [];
 
-  querySnapshot.forEach((doc) => {
-    const articleData = doc.data();
-    const articleId = articleData._id;
-    const article: Article = {
-      id: articleId,
-      image: articleData.image,
-      name: articleData.name,
-      price: articleData.price,
-    };
-    articlesData.push(article);
-  });
+    querySnapshot.forEach((doc) => {
+        const articleData = doc.data();
+        if (articleData.category) {
+            const articleId = articleData._id;
+            const article: Article = {
+                id: articleId,
+                image: articleData.image,
+                name: articleData.name,
+                price: articleData.price,
+                category: articleData.category
+            };
+            articlesData.push(article);
+        }
+    });
 
-  return articlesData;
+    return articlesData;
 };
