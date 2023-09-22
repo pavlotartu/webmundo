@@ -5,19 +5,22 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function CustomNavbar() {
     return (
-        <Navbar className="custom-navbar" expand="lg">
+        <Navbar className="custom-navbar fixed-top" expand="lg" style={{ marginLeft: '1vw' }}>
             <Container>
                 <Navbar.Brand as={Link} to="/">
                     <img src="./src/assets/img/logomundo.png" alt="Logo" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarNav" />
                 <Navbar.Collapse id="navbarNav">
-                    <Nav className="ml-auto">
+                    <Nav className="ml-auto ">
                         <Nav.Item>
-                            <Nav.Link as={Link} to="/">Home</Nav.Link>
+                            <Nav.Link as={Link} to="/" style={{ fontSize: '18px', fontWeight: 'bold' }}>Home</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link as={Link} to="/store">Tienda</Nav.Link>
+                            <Nav.Link as={Link} to="/store" style={{ fontSize: '18px', fontWeight: 'bold' }}>Tienda</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link as={Link} to="/contacto" style={{ fontSize: '18px', fontWeight: 'bold' }}>Contacto</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>

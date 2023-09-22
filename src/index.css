@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.m_tienda {
+  margin-top: 15vh;
+}
+
 .custom-navbar {
-  background: linear-gradient(to bottom, #ff007f, #ffffff);
+  background: linear-gradient(to bottom, #ffffff, #ffffff);
 }
