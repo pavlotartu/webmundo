@@ -3,24 +3,19 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAENsnEK89lcpj-j-ZWvkbILfyjsPG6kRc",
-    authDomain: "cotillonmundo-6d4bf.firebaseapp.com",
-    projectId: "cotillonmundo-6d4bf",
-    storageBucket: "cotillonmundo-6d4bf.appspot.com",
-    messagingSenderId: "776917138415",
-    appId: "1:776917138415:web:5d1f1f22192759161e141a",
-    measurementId: "G-90D6BPV03Q"
+
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export interface Article {
-    id: string;
-    image: string;
+    id: number;
     name: string;
     price: number;
     category?: string;
+    image: string;
+    quantity?: number;
 }
 
 export const getArticlesData = async () => {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getArticlesData, Article } from "../components/Key";
 import Navbar from '../components/Navbar';
+import Amount from "../components/Amount";
+import Carrito from "../components/Carrito";
 import { Modal } from "react-bootstrap";
 
 function Store() {
@@ -15,6 +17,12 @@ function Store() {
     );
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const [cartItems, setCartItems] = useState<Article[]>([]);
+    const [showCartModal, setShowCartModal] = useState(false);
+
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -114,11 +122,29 @@ function Store() {
         setRowsPerPage(newRowsPerPage);
     };
 
+    const handleAddToCart = (selectedProductId: number, quantity: number) => {
+        const selectedItem = articles.find((article) => article.id === selectedProductId);
+        if (selectedItem) {
+          // Verifica si el artículo ya está en el carrito
+          const existingItemIndex = cartItems.findIndex((item) => item.id === selectedProductId);
+          if (existingItemIndex !== -1) {
+            // Si el artículo ya está en el carrito, actualiza la cantidad en lugar de agregar uno nuevo
+            const updatedCartItems = [...cartItems];
+            updatedCartItems[existingItemIndex].quantity = (updatedCartItems[existingItemIndex].quantity || 0) + quantity;
+            setCartItems(updatedCartItems);
+          } else {
+            // Si el artículo no está en el carrito, agrégalo con la cantidad seleccionada
+            setCartItems([...cartItems, { ...selectedItem, quantity: quantity }]);
+          }
+        }
+      };
+
     return (
 
 
         <div>
             <Navbar />
+
             <div className="m_tienda">
                 <div className="d-flex flex-wrap justify-content-between">
                     <div className="Check">
@@ -167,6 +193,11 @@ function Store() {
                         </div>
                     </nav>
                 </div>
+
+                <button className="btn btn-primary" onClick={() => setShowCartModal(true)}>
+                    Ver Carrito
+                </button>
+                <Carrito cartItems={cartItems} showModal={showCartModal} closeModal={() => setShowCartModal(false)} />
 
                 <div className="d-flex justify-content-between" style={{ marginLeft: "3vw", marginRight: "3vw" }}>
                     <div className="d-flex  align-items-center mb-3">
@@ -264,7 +295,12 @@ function Store() {
                                         </td>
                                         <td className="align-middle col-6">{article.name}</td>
                                         <td className="align-middle col-2">{article.price}</td>
-                                        <td className="align-middle col-2">1</td>
+                                        <td className="align-middle col-2">
+                                            <Amount
+                                                onAddToCart={handleAddToCart}
+                                                selectedProductId={article.id} 
+                                            />
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
