@@ -11,3 +11,8 @@
 .custom-navbar {
   background: linear-gradient(to bottom, #ffffff, #ffffff);
 }
+
+.responsive-table {
+  overflow-x: auto;
+  white-space: nowrap;
+}

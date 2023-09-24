@@ -15,7 +15,7 @@ export interface Article {
     price: number;
     category?: string;
     image: string;
-    quantity?: number;
+    quantity: number;
 }
 
 export const getArticlesData = async () => {
@@ -31,7 +31,8 @@ export const getArticlesData = async () => {
                 image: articleData.image,
                 name: articleData.name,
                 price: articleData.price,
-                category: articleData.category
+                category: articleData.category,
+                quantity: 0, // Inicializado con 0 o el valor predeterminado deseado
             };
             articlesData.push(article);
         }
@@ -39,3 +40,4 @@ export const getArticlesData = async () => {
 
     return articlesData;
 };
+

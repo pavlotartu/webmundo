@@ -21,7 +21,9 @@ function Store() {
     const [cartItems, setCartItems] = useState<Article[]>([]);
     const [showCartModal, setShowCartModal] = useState(false);
 
-
+    const handleEmptyCart = () => {
+        setCartItems([]);
+    };
 
 
     useEffect(() => {
@@ -41,6 +43,23 @@ function Store() {
     useEffect(() => {
         setCurrentPage(1);
     }, [selectedCategories, searchText]);
+
+    useEffect(() => {
+        if (cartItems.length > 0) {
+            // Guardar el carrito en localStorage
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+    }, [cartItems]);
+
+
+
+    useEffect(() => {
+        const savedCartItems = localStorage.getItem("cartItems");
+        if (savedCartItems) {
+            setCartItems(JSON.parse(savedCartItems));
+        }
+    }, []);
+
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchText(event.target.value);
@@ -125,22 +144,25 @@ function Store() {
     const handleAddToCart = (selectedProductId: number, quantity: number) => {
         const selectedItem = articles.find((article) => article.id === selectedProductId);
         if (selectedItem) {
-          // Verifica si el artículo ya está en el carrito
-          const existingItemIndex = cartItems.findIndex((item) => item.id === selectedProductId);
-          if (existingItemIndex !== -1) {
-            // Si el artículo ya está en el carrito, actualiza la cantidad en lugar de agregar uno nuevo
-            const updatedCartItems = [...cartItems];
-            updatedCartItems[existingItemIndex].quantity = (updatedCartItems[existingItemIndex].quantity || 0) + quantity;
-            setCartItems(updatedCartItems);
-          } else {
-            // Si el artículo no está en el carrito, agrégalo con la cantidad seleccionada
-            setCartItems([...cartItems, { ...selectedItem, quantity: quantity }]);
-          }
+            const existingItemIndex = cartItems.findIndex((item) => item.id === selectedProductId);
+            if (existingItemIndex !== -1) {
+                // Si el artículo ya está en el carrito, aumenta la cantidad en lugar de reemplazarlo
+                const updatedCartItems = [...cartItems];
+                updatedCartItems[existingItemIndex].quantity += quantity;
+                setCartItems(updatedCartItems);
+            } else {
+                // Si el artículo no está en el carrito, agrégalo con la cantidad especificada
+                setCartItems([...cartItems, { ...selectedItem, quantity: quantity }]);
+            }
+
+            // Actualizar el almacenamiento local con el carrito completo
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
         }
-      };
+    };
+
+
 
     return (
-
 
         <div>
             <Navbar />
@@ -197,7 +219,15 @@ function Store() {
                 <button className="btn btn-primary" onClick={() => setShowCartModal(true)}>
                     Ver Carrito
                 </button>
-                <Carrito cartItems={cartItems} showModal={showCartModal} closeModal={() => setShowCartModal(false)} />
+                <Carrito
+                    cartItems={cartItems}
+                    showModal={showCartModal}
+                    closeModal={() => setShowCartModal(false)}
+                    emptyCart={handleEmptyCart}
+                    setCartItems={setCartItems} // Pasa setCartItems al componente Carrito
+                />
+
+
 
                 <div className="d-flex justify-content-between" style={{ marginLeft: "3vw", marginRight: "3vw" }}>
                     <div className="d-flex  align-items-center mb-3">
@@ -298,7 +328,7 @@ function Store() {
                                         <td className="align-middle col-2">
                                             <Amount
                                                 onAddToCart={handleAddToCart}
-                                                selectedProductId={article.id} 
+                                                selectedProductId={article.id}
                                             />
                                         </td>
                                     </tr>

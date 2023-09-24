@@ -1,4 +1,3 @@
-// Amount.tsx
 import React, { useState } from "react";
 
 interface AmountProps {
@@ -22,9 +21,9 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
   const handleAddToCart = () => {
     if (selectedProductId !== undefined) {
       onAddToCart(selectedProductId, quantity); 
-      setQuantity(1);
     }
   };
+  
 
   return (
     <div className="product-quantity-input">
