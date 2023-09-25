@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 interface AmountProps {
   onAddToCart: (selectedProductId: number, quantity: number) => void;
-  selectedProductId: number; 
+  selectedProductId: number;
 }
 
 const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
@@ -20,10 +20,9 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
 
   const handleAddToCart = () => {
     if (selectedProductId !== undefined) {
-      onAddToCart(selectedProductId, quantity); 
+      onAddToCart(selectedProductId, quantity);
     }
   };
-  
 
   return (
     <div className="product-quantity-input">
@@ -40,7 +39,10 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
           className="form-control text-center"
           value={quantity}
           readOnly
+          id={`quantity-input-${selectedProductId}`}
+          name={`quantity-input-${selectedProductId}`}
         />
+
         <button
           className="btn btn-outline-secondary"
           type="button"

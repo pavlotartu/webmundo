@@ -1,5 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Modal, Table } from "react-bootstrap";
+import { Article } from "./Key";
+
+interface CarritoProps {
+  cartItems: Article[];
+  showModal: boolean;
+  closeModal: () => void;
+  emptyCart: () => void;
+  setCartItems: (items: Article[]) => void;
+}
 
 const Carrito: React.FC<CarritoProps> = ({
   cartItems,
@@ -8,7 +17,6 @@ const Carrito: React.FC<CarritoProps> = ({
   emptyCart,
   setCartItems,
 }) => {
-
 
   useEffect(() => {
     const cantidadesGuardadas = localStorage.getItem("cantidadesArticulosCarrito");
@@ -20,9 +28,7 @@ const Carrito: React.FC<CarritoProps> = ({
       }));
       setCartItems(carritoActualizado);
     }
-  }, []); 
-  
-  
+  }, []);
 
   const calculateTotal = () => {
     let total = 0;
@@ -69,16 +75,16 @@ const Carrito: React.FC<CarritoProps> = ({
       return acc;
     }, {});
     localStorage.setItem("cantidadesArticulosCarrito", JSON.stringify(cantidades));
-  };  
+  };
 
   return (
     <Modal show={showModal} onHide={closeModal} dialogClassName="modal-lg">
-<Modal.Header closeButton>
-  <Modal.Title>Carrito de Compras</Modal.Title>
-  <button className="btn btn-danger" onClick={handleEmptyCart}>
-    Vaciar Carrito
-  </button>
-</Modal.Header>
+      <Modal.Header closeButton>
+        <Modal.Title>Carrito de Compras</Modal.Title>
+        <button className="btn btn-danger" onClick={handleEmptyCart}>
+          Vaciar Carrito
+        </button>
+      </Modal.Header>
       <Modal.Body>
         <div className="table-responsive">
           <Table striped bordered hover className="responsive-table">
@@ -123,7 +129,9 @@ const Carrito: React.FC<CarritoProps> = ({
                           className="form-control text-center"
                           value={item.quantity}
                           readOnly
+                          id={`quantity-${item.id}`}
                         />
+
                         <button
                           className="btn btn-outline-secondary"
                           type="button"

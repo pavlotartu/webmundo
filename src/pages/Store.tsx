@@ -46,12 +46,9 @@ function Store() {
 
     useEffect(() => {
         if (cartItems.length > 0) {
-            // Guardar el carrito en localStorage
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
         }
     }, [cartItems]);
-
-
 
     useEffect(() => {
         const savedCartItems = localStorage.getItem("cartItems");
@@ -59,7 +56,6 @@ function Store() {
             setCartItems(JSON.parse(savedCartItems));
         }
     }, []);
-
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchText(event.target.value);
@@ -146,21 +142,16 @@ function Store() {
         if (selectedItem) {
             const existingItemIndex = cartItems.findIndex((item) => item.id === selectedProductId);
             if (existingItemIndex !== -1) {
-                // Si el artículo ya está en el carrito, aumenta la cantidad en lugar de reemplazarlo
                 const updatedCartItems = [...cartItems];
                 updatedCartItems[existingItemIndex].quantity += quantity;
                 setCartItems(updatedCartItems);
             } else {
-                // Si el artículo no está en el carrito, agrégalo con la cantidad especificada
                 setCartItems([...cartItems, { ...selectedItem, quantity: quantity }]);
             }
 
-            // Actualizar el almacenamiento local con el carrito completo
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
         }
     };
-
-
 
     return (
 
@@ -224,10 +215,8 @@ function Store() {
                     showModal={showCartModal}
                     closeModal={() => setShowCartModal(false)}
                     emptyCart={handleEmptyCart}
-                    setCartItems={setCartItems} // Pasa setCartItems al componente Carrito
+                    setCartItems={setCartItems}
                 />
-
-
 
                 <div className="d-flex justify-content-between" style={{ marginLeft: "3vw", marginRight: "3vw" }}>
                     <div className="d-flex  align-items-center mb-3">
@@ -381,7 +370,6 @@ function Store() {
             </div>
 
         </div>
-
 
     );
 }
