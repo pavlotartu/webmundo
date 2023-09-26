@@ -3,8 +3,9 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 
 const firebaseConfig = {
-
+/* mis credenciales */
 };
+
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -16,8 +17,8 @@ export interface Article {
     category: string;
     image: string;
     quantity: number;
-  }
-   
+}
+
 
 export const getArticlesData = async () => {
     const querySnapshot = await getDocs(collection(db, "articles"));

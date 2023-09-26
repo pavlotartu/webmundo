@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getArticlesData, Article } from "../components/Key";
-import Navbar from '../components/Navbar';
+import Navbar from "../components/Navbar";
 import Amount from "../components/Amount";
 import Carrito from "../components/Carrito";
-import { Modal } from "react-bootstrap";
+import { Modal, Table } from "react-bootstrap";
 
 function Store() {
     const [articles, setArticles] = useState<Article[]>([]);
@@ -18,13 +18,16 @@ function Store() {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
-    const [cartItems, setCartItems] = useState<Article[]>([]);
+    const [cartItems, setCartItems] = useState<Article[]>(() => {
+        const savedCartItems = localStorage.getItem("cartItems");
+        return savedCartItems ? JSON.parse(savedCartItems) : [];
+    });
+
     const [showCartModal, setShowCartModal] = useState(false);
 
     const handleEmptyCart = () => {
         setCartItems([]);
     };
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -137,10 +140,26 @@ function Store() {
         setRowsPerPage(newRowsPerPage);
     };
 
+    const [cartTotal, setCartTotal] = useState<number>(0);
+
+    useEffect(() => {
+        const total = cartItems.reduce((acc, item) => {
+            return acc + (item.price * (item.quantity || 1));
+        }, 0);
+        setCartTotal(total);
+
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
+
+
     const handleAddToCart = (selectedProductId: number, quantity: number) => {
-        const selectedItem = articles.find((article) => article.id === selectedProductId);
+        const selectedItem = articles.find(
+            (article) => article.id === selectedProductId
+        );
         if (selectedItem) {
-            const existingItemIndex = cartItems.findIndex((item) => item.id === selectedProductId);
+            const existingItemIndex = cartItems.findIndex(
+                (item) => item.id === selectedProductId
+            );
             if (existingItemIndex !== -1) {
                 const updatedCartItems = [...cartItems];
                 updatedCartItems[existingItemIndex].quantity += quantity;
@@ -154,7 +173,6 @@ function Store() {
     };
 
     return (
-
         <div>
             <Navbar />
 
@@ -162,30 +180,28 @@ function Store() {
                 <div className="d-flex flex-wrap justify-content-between">
                     <div className="Check">
                         <div className="form-check form-switch">
-                            {categories
-                                .sort()
-                                .map((category, index) => (
-                                    <label
-                                        key={category}
-                                        className={`btn btn-outline-primary mx-1 ${selectedCategories.includes(category) ? "active" : ""
-                                            }`}
-                                        style={{ margin: "4px" }}
-                                    >
-                                        <input
-                                            id={`check-${index}`}
-                                            type="checkbox"
-                                            className="btn-check"
-                                            value={category}
-                                            checked={selectedCategories.includes(category)}
-                                            onChange={() => handleCategoryToggle(category)}
-                                        />
-                                        {category}
-                                    </label>
-                                ))}
+                            {categories.sort().map((category, index) => (
+                                <label
+                                    key={category}
+                                    className={`btn btn-outline-primary mx-1 ${selectedCategories.includes(category) ? "active" : ""
+                                        }`}
+                                    style={{ margin: "8px" }}
+                                >
+                                    <input
+                                        id={`check-${index}`}
+                                        type="checkbox"
+                                        className="btn-check"
+                                        value={category}
+                                        checked={selectedCategories.includes(category)}
+                                        onChange={() => handleCategoryToggle(category)}
+                                    />
+                                    {category}
+                                </label>
+                            ))}
                         </div>
                     </div>
 
-                    <nav className="navbar" style={{ marginRight: "2vw" }}>
+                    <nav className="navbar" style={{ marginRight: "2.2vw" }}>
                         <div className="container-fluid">
                             <form className="ms-auto" role="search">
                                 <div className="input-group">
@@ -199,7 +215,7 @@ function Store() {
                                         onChange={handleSearchChange}
                                     />
                                     <button className="btn btn-primary" type="submit">
-                                        Search
+                                        🔍
                                     </button>
                                 </div>
                             </form>
@@ -207,9 +223,17 @@ function Store() {
                     </nav>
                 </div>
 
-                <button className="btn btn-primary" onClick={() => setShowCartModal(true)}>
-                    Ver Carrito
-                </button>
+                <div className="d-flex justify-content-end btn-lg" style={{ marginRight: "2.5vw" }}>
+                    <button
+                        className="btn btn-primary m-2"
+                        onClick={() => setShowCartModal(true)}
+                        style={{ fontSize: '20px' }}
+                    >
+                        {cartTotal > 0 && <span>Total: ${cartTotal.toFixed(2)}</span>} 🛒
+
+                    </button>
+                </div>
+
                 <Carrito
                     cartItems={cartItems}
                     showModal={showCartModal}
@@ -218,15 +242,20 @@ function Store() {
                     setCartItems={setCartItems}
                 />
 
-                <div className="d-flex justify-content-between" style={{ marginLeft: "3vw", marginRight: "3vw" }}>
+                <div
+                    className="d-flex justify-content-between"
+                    style={{ marginLeft: "3vw", marginRight: "3vw" }}
+                >
                     <div className="d-flex  align-items-center mb-3">
-                        <div>
-                            <label htmlFor="rowsPerPageSelect">Filas por página:</label>
+                        <div className="d-flex">
+                            <label htmlFor="rowsPerPageSelect">📑</label>
                             <select
                                 className="form-select form-select-sm"
                                 id="rowsPerPageSelect"
                                 name="rowsPerPage"
-                                onChange={(e) => handleRowsPerPageChange(parseInt(e.target.value))}
+                                onChange={(e) =>
+                                    handleRowsPerPageChange(parseInt(e.target.value))
+                                }
                                 value={rowsPerPage}
                             >
                                 <option value="5">5</option>
@@ -265,7 +294,7 @@ function Store() {
 
                 <div style={{ marginLeft: "3vw", marginRight: "3vw" }}>
                     <div className="table-responsive">
-                        <table className="table w-100">
+                        <Table striped hover className="table w-100">
                             <thead className="table-dark">
                                 <tr>
                                     <th className="align-middle" scope="col">
@@ -277,10 +306,10 @@ function Store() {
                                     <th className="align-middle col-6" scope="col">
                                         PRODUCTO
                                     </th>
-                                    <th className="align-middle col-2" scope="col">
+                                    <th className="align-middle col-2 text-center" scope="col">
                                         PRECIO
                                     </th>
-                                    <th className="align-middle col-2" scope="col">
+                                    <th className="align-middle col-2 text-center" scope="col">
                                         CANTIDAD
                                     </th>
                                 </tr>
@@ -288,33 +317,42 @@ function Store() {
                             <tbody className="table-group-divider">
                                 {currentRows.map((article) => (
                                     <tr key={article.id}>
-                                        <td className="align-middle">{article.id}</td>
+                                        <td className="align-middle text-end">{article.id}</td>
                                         <td
                                             style={{
-                                                height: "20vh",
-                                                display: "flex",
-                                                alignItems: "center",
-                                                justifyContent: "center",
                                                 position: "relative",
+
+                                                height: "100px",
                                                 textAlign: "center",
                                             }}
                                         >
-                                            <img
-                                                src={article.image}
-                                                alt={article.name ?? "Nombre no disponible"}
-                                                className="img-fluid image-hover"
+                                            <div
                                                 style={{
-                                                    maxWidth: "10vw",
-                                                    maxHeight: "10vw",
-                                                    display: "block",
-                                                    margin: "0 auto",
+                                                    display: "inline-block",
+                                                    position: "relative",
+                                                    top: "50%",
+                                                    transform: "translateY(-50%)",
                                                 }}
-                                                onClick={() => openModal(article.image, article.name)}
-                                            />
+                                            >
+                                                <img
+                                                    src={article.image}
+                                                    alt={article.name ?? "Nombre no disponible"}
+                                                    className="img-fluid image-hover"
+                                                    style={{
+                                                        maxWidth: "10vw",
+                                                        maxHeight: "10vw",
+                                                        display: "block",
+                                                        margin: "0 auto",
+                                                    }}
+                                                    onClick={() => openModal(article.image, article.name)}
+                                                />
+                                            </div>
                                         </td>
+
+
                                         <td className="align-middle col-6">{article.name}</td>
-                                        <td className="align-middle col-2">{article.price}</td>
-                                        <td className="align-middle col-2">
+                                        <td className="align-middle col-2 text-center">{article.price}</td>
+                                        <td className="align-middle col-2 text-end">
                                             <Amount
                                                 onAddToCart={handleAddToCart}
                                                 selectedProductId={article.id}
@@ -323,8 +361,9 @@ function Store() {
                                     </tr>
                                 ))}
                             </tbody>
-                        </table>
+                        </Table>
                     </div>
+
                     <nav>
                         <ul className="pagination pagination-sm justify-content-end">
                             {renderPageNumbers().map((page, index) => (
@@ -368,9 +407,7 @@ function Store() {
                     </Modal.Body>
                 </Modal>
             </div>
-
         </div>
-
     );
 }
 
