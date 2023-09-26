@@ -17,9 +17,11 @@ const Carrito: React.FC<CarritoProps> = ({
   emptyCart,
   setCartItems,
 }) => {
-
+  
   useEffect(() => {
-    const cantidadesGuardadas = localStorage.getItem("cantidadesArticulosCarrito");
+    const cantidadesGuardadas = localStorage.getItem(
+      "cantidadesArticulosCarrito"
+    );
     if (cantidadesGuardadas) {
       const cantidadesParseadas = JSON.parse(cantidadesGuardadas);
       const carritoActualizado = cartItems.map((item) => ({
@@ -70,51 +72,66 @@ const Carrito: React.FC<CarritoProps> = ({
   };
 
   const updateLocalStorage = (updatedCartItems: Article[]) => {
-    const cantidades = updatedCartItems.reduce((acc, item) => {
-      acc[item.id] = item.quantity;
-      return acc;
-    }, {});
-    localStorage.setItem("cantidadesArticulosCarrito", JSON.stringify(cantidades));
+    const cantidades: { [key: number]: number } = {};
+    updatedCartItems.forEach((item) => {
+      cantidades[item.id] = item.quantity;
+    });
+    localStorage.setItem(
+      "cantidadesArticulosCarrito",
+      JSON.stringify(cantidades)
+    );
   };
 
   return (
     <Modal show={showModal} onHide={closeModal} dialogClassName="modal-lg">
       <Modal.Header closeButton>
         <Modal.Title>Carrito de Compras</Modal.Title>
-        <button className="btn btn-danger" onClick={handleEmptyCart}>
-          Vaciar Carrito
+        <button className="btn btn-danger ms-auto" onClick={handleEmptyCart}>
+        🗑️ Vaciar Carrito
         </button>
       </Modal.Header>
+
       <Modal.Body>
         <div className="table-responsive">
-          <Table striped bordered hover className="responsive-table">
+          <Table striped hover className="responsive-table">
             <thead>
               <tr>
                 <th>Código</th>
                 <th>Imagen</th>
                 <th className="col-md-4">Producto</th>
-                <th className="col-md-2">Cantidad</th>
+                <th className="col-md-2 text-center">Cantidad</th>
                 <th>Precio</th>
                 <th>Total</th>
-                <th>Acciones</th>
+                <th className="text-center">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {cartItems.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.id}</td>
-                  <td>
-                    <img
-                      src={item.image}
-                      alt={item.name || "Nombre no disponible"}
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                      }}
-                    />
+                  <td className="align-middle text-end">{item.id}</td>
+                  <td style={{
+                    position: "relative",
+                    verticalAlign: "middle",
+                    height: "100px"
+                  }}>
+                    <div style={{
+                      position: "absolute",
+                      top: "50%",
+                      transform: "translateY(-50%)"
+                    }}>
+                      <img
+                        src={item.image}
+                        alt={item.name || "Nombre no disponible"}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
                   </td>
-                  <td>{item.name}</td>
-                  <td>
+                  <td className="align-middle">{item.name}</td>
+                  <td className="align-middle text-end">
                     <div className="product-quantity-input">
                       <div className="input-group mb-3">
                         <button
@@ -131,7 +148,6 @@ const Carrito: React.FC<CarritoProps> = ({
                           readOnly
                           id={`quantity-${item.id}`}
                         />
-
                         <button
                           className="btn btn-outline-secondary"
                           type="button"
@@ -142,14 +158,15 @@ const Carrito: React.FC<CarritoProps> = ({
                       </div>
                     </div>
                   </td>
-                  <td>${item.price}</td>
-                  <td>${item.price * (item.quantity || 1)}</td>
-                  <td>
+                  <td className="align-middle text-end">${item.price}</td>
+                  <td className="align-middle text-end">${item.price * (item.quantity || 1)}</td>
+                  <td className="align-middle text-center">
                     <button
                       className="btn btn-danger btn-sm"
                       onClick={() => handleRemoveFromCart(index)}
+                      style={{ fontSize: '20px' }}
                     >
-                      <i className="bi bi-trash"></i> Eliminar
+                      <i className="bi bi-trash"></i> 🗑️
                     </button>
                   </td>
                 </tr>
@@ -158,11 +175,18 @@ const Carrito: React.FC<CarritoProps> = ({
             <tfoot>
               <tr>
                 <td colSpan={6}></td>
-                <td>Total: ${calculateTotal()}</td>
+                <td className="col-2">
+                  <div className="d-flex justify-content-between">
+                    <span>Total:</span>
+                    <span>${calculateTotal()}</span>
+                  </div>
+                </td>
               </tr>
             </tfoot>
+
           </Table>
         </div>
+
       </Modal.Body>
       <Modal.Footer>
         <button className="btn btn-secondary" onClick={closeModal}>
