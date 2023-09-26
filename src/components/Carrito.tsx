@@ -17,7 +17,7 @@ const Carrito: React.FC<CarritoProps> = ({
   emptyCart,
   setCartItems,
 }) => {
-
+  
   useEffect(() => {
     const cantidadesGuardadas = localStorage.getItem(
       "cantidadesArticulosCarrito"
@@ -87,7 +87,11 @@ const Carrito: React.FC<CarritoProps> = ({
       <Modal.Header closeButton>
         <Modal.Title>Carrito de Compras</Modal.Title>
         <button className="btn btn-danger ms-auto" onClick={handleEmptyCart}>
+<<<<<<< HEAD
           🗑️ Vaciar Carrito
+=======
+        🗑️ Vaciar Carrito
+>>>>>>> 9c0ff0c94ccfebfacab43086d2c7b7329b26c39c
         </button>
       </Modal.Header>
 
