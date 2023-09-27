@@ -25,10 +25,11 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
   };
 
   return (
-    <div className="product-quantity-input">
-      <div className="input-group mb-3">
+    
+    <div className="product-quantity-input d-flex flex-wrap">
+      <div className="input-group m-2">
         <button
-          className="btn btn-outline-secondary"
+          className="btn btn-outline-secondary btn-sm"
           type="button"
           onClick={handleDecrement}
         >
@@ -36,7 +37,7 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
         </button>
         <input
           type="text"
-          className="form-control text-center"
+          className="form-control text-center p-2"
           value={quantity}
           readOnly
           id={`quantity-input-${selectedProductId}`}
@@ -44,7 +45,7 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
         />
 
         <button
-          className="btn btn-outline-secondary"
+          className="btn btn-outline-secondary btn-sm"
           type="button"
           onClick={handleIncrement}
         >
@@ -52,11 +53,16 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
         </button>
       </div>
       <button
-        className="btn btn-primary"
+        className="btn btn-sm m-auto "
         onClick={handleAddToCart}
         disabled={selectedProductId === undefined}
       >
-        Agregar
+        <img
+          src="../src/assets/img/agregar.png"
+          style={{ width: '25px', height: 'auto' }}
+          alt="Tienda"
+          className="hover-effect"
+        />
       </button>
     </div>
   );

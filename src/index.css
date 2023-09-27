@@ -4,10 +4,27 @@
   box-sizing: border-box;
 }
 
-.m_tienda {
-  margin-top: 15vh;
-}
-
 .custom-navbar {
   background: linear-gradient(to bottom, #ffffff, #ffffff);
+}
+
+.hover-effect:hover {
+  transform: scale(1.1); 
+}
+
+.check {
+  margin-top: 14vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media only screen and (min-width: 320px) and (max-width:920px) {
+  .check {
+    margin-top: 10vh;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-content: center;
+  }
 }

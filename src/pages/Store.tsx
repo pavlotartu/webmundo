@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getArticlesData, Article } from "../components/Key";
 import Navbar from "../components/Navbar";
 import Amount from "../components/Amount";
-import Carrito from "../components/Carrito";
+import Carrito from "../components/Cart";
 import { Modal, Table } from "react-bootstrap";
 
 function Store() {
@@ -173,19 +173,18 @@ function Store() {
     };
 
     return (
-        <div>
+        <>
             <Navbar />
-
-            <div className="m_tienda">
-                <div className="d-flex flex-wrap justify-content-between">
-                    <div className="Check">
+            <main>
+                        <div className="check">
+                    <div className="d-flex align-items-center" >
                         <div className="form-check form-switch">
                             {categories.sort().map((category, index) => (
                                 <label
                                     key={category}
                                     className={`btn btn-outline-primary mx-1 ${selectedCategories.includes(category) ? "active" : ""
                                         }`}
-                                    style={{ margin: "8px" }}
+                                    style={{ margin: "0.5vw 0.5vw 0.5vw 0.5vw" }}
                                 >
                                     <input
                                         id={`check-${index}`}
@@ -201,21 +200,23 @@ function Store() {
                         </div>
                     </div>
 
-                    <nav className="navbar" style={{ marginRight: "2.2vw" }}>
+                    <nav className="navbar" style={{ marginRight: "2vw" }}>
                         <div className="container-fluid">
                             <form className="ms-auto" role="search">
                                 <div className="input-group">
                                     <input
                                         className="form-control"
                                         type="search"
-                                        placeholder="Search by name"
+                                        placeholder="Buscar tu producto"
                                         aria-label="Search"
                                         id="search-input"
                                         value={searchText}
                                         onChange={handleSearchChange}
+                                        
                                     />
-                                    <button className="btn btn-primary" type="submit">
-                                        🔍
+
+                                    <button className="btn" type="submit">
+                                        <img src="../src/assets/img/lupa.png" style={{ width: '35px', height: 'auto' }} className="hover-effect"></img>
                                     </button>
                                 </div>
                             </form>
@@ -225,11 +226,12 @@ function Store() {
 
                 <div className="d-flex justify-content-end btn-lg" style={{ marginRight: "2.5vw" }}>
                     <button
-                        className="btn btn-primary m-2"
+                        className="btn  m-2"
                         onClick={() => setShowCartModal(true)}
-                        style={{ fontSize: '20px' }}
+                        style={{ fontSize: '20px', fontWeight: 'bold' }}
                     >
-                        {cartTotal > 0 && <span>Total: ${cartTotal.toFixed(2)}</span>} 🛒
+                        {cartTotal > 0 && <span className="small">Total: ${cartTotal.toFixed(2)}</span>
+                        } <img src="../src/assets/img/carrito.png" style={{ width: '50px', height: 'auto' }} className="hover-effect"></img>
 
                     </button>
                 </div>
@@ -248,7 +250,7 @@ function Store() {
                 >
                     <div className="d-flex  align-items-center mb-3">
                         <div className="d-flex">
-                            <label htmlFor="rowsPerPageSelect">📑</label>
+                            <label htmlFor="rowsPerPageSelect"><img src="../src/assets/img/fila.png" style={{ width: '35px', height: 'auto' }}></img></label>
                             <select
                                 className="form-select form-select-sm"
                                 id="rowsPerPageSelect"
@@ -406,8 +408,9 @@ function Store() {
                         )}
                     </Modal.Body>
                 </Modal>
-            </div>
-        </div>
+                </main>
+            </>
+
     );
 }
 

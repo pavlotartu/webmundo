@@ -5,39 +5,46 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function CustomNavbar() {
     return (
-        <Navbar className="custom-navbar fixed-top" expand="lg">
-            <Container style={{ marginLeft: '1vw' }}>
-                <Navbar.Brand as={Link} to="/">
-                    <img
-                        src="./src/assets/img/logomundo.png"
-                        alt="Logo"
-                        style={{ width: '150px' }}
-                    />
-                </Navbar.Brand>
+        <header>
+            <Navbar className="custom-navbar fixed-top" expand="lg">
+                <Container className='ml-0'>
+                    <Navbar.Brand as={Link} to="/">
+                        <img
+                            src="./src/assets/img/logomundo.png"
+                            alt="Logo"
+                            style={{ width: '250px' }}
+                        />
+                    </Navbar.Brand>
 
-                <Navbar.Toggle aria-controls="navbarNav" />
-                <Navbar.Collapse id="navbarNav">
-                    <Nav className="ml-auto">
-                        <Nav.Item>
-                            <Nav.Link as={Link} to="/" style={{ fontSize: '18px', fontWeight: 'bold' }}>
-                                <span style={{ fontSize: '24px' }}>🏠</span> Home
+                    <Navbar.Toggle aria-controls="navbarNav" />
+                    <Navbar.Collapse id="navbarNav" className="justify-content-end">
+                        <Nav>
+                            <Nav.Link as={Link} to="/" className="mr-3 text-center">
+                                <div>
+                                    <img src="../src/assets/img/home.png" style={{ width: '30px', height: 'auto' }} alt="Home" className="hover-effect" />
+                                    <div>Home</div>
+                                </div>
                             </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link as={Link} to="/store" style={{ fontSize: '18px', fontWeight: 'bold' }}>
-                                <span style={{ fontSize: '24px' }}>🏪</span> Tienda
-                            </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link as={Link} to="/contacto" style={{ fontSize: '18px', fontWeight: 'bold' }}>
-                                <span style={{ fontSize: '24px' }}>📱</span> Contacto
-                            </Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Navbar.Collapse>
 
-            </Container>
-        </Navbar>
+                            <Nav.Link as={Link} to="/store" className="mr-3 text-center">
+                                <div>
+                                    <img src="../src/assets/img/tienda.png" style={{ width: '30px', height: 'auto' }} alt="Tienda" className="hover-effect" />
+                                    <div>Tienda</div>
+                                </div>
+                            </Nav.Link>
+
+                            <Nav.Link as={Link} to="/contacto" className="mr-3 text-center">
+                                <div>
+                                    <img src="../src/assets/img/llamar.png" style={{ width: '30px', height: 'auto' }} alt="Contacto" className="hover-effect" />
+                                    <div>Contacto</div>
+                                </div>
+                            </Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+
+                </Container>
+            </Navbar>
+        </header>
     );
 }
 

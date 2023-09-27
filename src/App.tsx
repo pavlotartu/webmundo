@@ -6,13 +6,13 @@ import Contacto from './pages/Contacto';
 function App() {
   return (
     <Router>
-      <div>
+      <>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/store" element={<Store />} />
           <Route path="/contacto" element={<Contacto />} />
         </Routes>
-      </div>
+      </>
     </Router>
   );
 }
