@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Article } from "./Key";
 import { Modal, Form, Button, Table } from "react-bootstrap";
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 interface SendProps {
     cartItems: Article[];
@@ -26,11 +28,60 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
         }));
     };
 
+    const clearCart = () => {
+        localStorage.removeItem("cartItems");
+        localStorage.removeItem("cantidadesArticulosCarrito");
+    };
+
     const handleSubmit = () => {
+        const doc = new jsPDF('p', 'mm', 'a4');
+
+        doc.text('Formulario de Compra', 10, 10);
+
+        doc.text(`Nombre: ${formData.firstName} ${formData.lastName}`, 10, 20);
+        doc.text(
+            `Dirección: ${formData.address}, ${formData.city}, ${formData.province}`,
+            10,
+            30
+        );
+        doc.text(`Teléfono de Contacto: ${formData.phoneNumber}`, 10, 40);
+
+        const tableHeaders = ['Código', 'Producto', 'Cantidad', 'Precio', 'Subtotal'];
+        const tableData = cartItems.map((item) => [
+            item.id,
+            item.name,
+            item.quantity,
+            `$${item.price}`,
+            `$${item.price * item.quantity}`,
+        ]);
+
+        let yOffset = 70;
+        const lineHeight = 10;
+
+        autoTable(doc, {
+            head: [tableHeaders],
+            body: tableData,
+            startY: yOffset,
+            theme: 'plain',
+            margin: { top: 10, right: 10, bottom: 10, left: 10 },
+        });
+
+        const total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        doc.text(`Total: $${total}`, 10, yOffset + tableData.length * lineHeight + 10);
+
+        doc.save('pedido.pdf');
+
+        localStorage.removeItem("cartItems");
+        localStorage.removeItem("cantidadesArticulosCarrito");
+
+        window.location.reload();
+
+        clearCart();
 
         closeModal();
     };
 
+    
     return (
         <Modal show={showModal} onHide={closeModal} dialogClassName="modal-lg">
             <Modal.Header closeButton>
@@ -148,7 +199,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
 
             <Modal.Footer>
                 <Button variant="primary" onClick={handleSubmit}>
-                    Confirmar Compra
+                    Descargar Pedido
                 </Button>
             </Modal.Footer>
         </Modal>
