@@ -16,7 +16,7 @@ function Store() {
         null
     );
     const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(25);
 
     const [cartItems, setCartItems] = useState<Article[]>(() => {
         const savedCartItems = localStorage.getItem("cartItems");
@@ -106,7 +106,7 @@ function Store() {
 
     const renderPageNumbers = (): (number | string)[] => {
         const pages: (number | string)[] = [];
-        const maxPageButtons = 5;
+        const maxPageButtons = 25;
 
         let start = Math.max(1, currentPage - Math.floor(maxPageButtons / 2));
         let end = Math.min(totalPages, start + maxPageButtons - 1);
@@ -176,7 +176,7 @@ function Store() {
         <>
             <Navbar />
             <main>
-                        <div className="check">
+                <div className="check">
                     <div className="d-flex align-items-center" >
                         <div className="form-check form-switch">
                             {categories.sort().map((category, index) => (
@@ -212,7 +212,7 @@ function Store() {
                                         id="search-input"
                                         value={searchText}
                                         onChange={handleSearchChange}
-                                        
+
                                     />
 
                                     <button className="btn" type="submit">
@@ -408,8 +408,8 @@ function Store() {
                         )}
                     </Modal.Body>
                 </Modal>
-                </main>
-            </>
+            </main>
+        </>
 
     );
 }
