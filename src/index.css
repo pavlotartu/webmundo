@@ -5,7 +5,11 @@
 }
 
 .custom-navbar {
-  background: linear-gradient(to bottom, #ffffff, #ffffff);
+  background: linear-gradient(to bottom right, #ffffff 45%, #87faf4 0%, #ffffff 60%);
+}
+
+.logo_menu {
+  width: 260px;
 }
 
 .hover-effect:hover {
@@ -20,6 +24,10 @@
 }
 
 @media only screen and (min-width: 320px) and (max-width:920px) {
+  .logo_menu {
+    width: 220px;
+  }
+
   .check {
     margin-top: 15vh;
       display: flex;
@@ -28,3 +36,4 @@
       align-content: center;
   }
 }
+

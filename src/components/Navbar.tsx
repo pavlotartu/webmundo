@@ -15,10 +15,9 @@ function CustomNavbar() {
             <Navbar className="custom-navbar fixed-top" expand="lg">
                 <Container className='ml-0'>
                     <Navbar.Brand as={Link} to="/">
-                        <img
+                        <img className='logo_menu'
                             src="./src/assets/img/logomundo.png"
                             alt="Logo"
-                            style={{ width: '250px' }}
                         />
                     </Navbar.Brand>
 

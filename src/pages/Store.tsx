@@ -17,16 +17,19 @@ function Store() {
     );
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(25);
-
     const [cartItems, setCartItems] = useState<Article[]>(() => {
         const savedCartItems = localStorage.getItem("cartItems");
         return savedCartItems ? JSON.parse(savedCartItems) : [];
     });
-
     const [showCartModal, setShowCartModal] = useState(false);
+    const [cartTotal, setCartTotal] = useState<number>(0);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    const handleEmptyCart = () => {
-        setCartItems([]);
+    const calculateCartTotal = () => {
+        const total = cartItems.reduce((acc, item) => {
+            return acc + (item.price * (item.quantity || 1));
+        }, 0);
+        return total;
     };
 
     useEffect(() => {
@@ -48,16 +51,22 @@ function Store() {
     }, [selectedCategories, searchText]);
 
     useEffect(() => {
-        if (cartItems.length > 0) {
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-        }
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+        const total = calculateCartTotal();
+        setCartTotal(total);
     }, [cartItems]);
 
+    const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+    };
+
     useEffect(() => {
-        const savedCartItems = localStorage.getItem("cartItems");
-        if (savedCartItems) {
-            setCartItems(JSON.parse(savedCartItems));
-        }
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,18 +149,6 @@ function Store() {
         setRowsPerPage(newRowsPerPage);
     };
 
-    const [cartTotal, setCartTotal] = useState<number>(0);
-
-    useEffect(() => {
-        const total = cartItems.reduce((acc, item) => {
-            return acc + (item.price * (item.quantity || 1));
-        }, 0);
-        setCartTotal(total);
-
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    }, [cartItems]);
-
-
     const handleAddToCart = (selectedProductId: number, quantity: number) => {
         const selectedItem = articles.find(
             (article) => article.id === selectedProductId
@@ -167,8 +164,140 @@ function Store() {
             } else {
                 setCartItems([...cartItems, { ...selectedItem, quantity: quantity }]);
             }
+        }
+    };
 
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    const handleEmptyCart = () => {
+        setCartItems([]);
+    };
+
+    const renderContent = () => {
+        if (windowWidth <= 920) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        {currentRows.map((article) => (
+                            <div key={article.id} className="col-6 col-sm-4 col-md-4 mb-4">
+                                <div className="card">
+                                    <img
+                                        src={article.image}
+                                        className="card-img-top"
+                                        alt={article.name ?? "Nombre no disponible"}
+                                        onClick={() => openModal(article.image, article.name)}
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">{article.name}</h5>
+                                        <p className="card-text">Precio: ${article.price}</p>
+                                        <Amount
+                                            onAddToCart={handleAddToCart}
+                                            selectedProductId={article.id}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div style={{ marginLeft: "3vw", marginRight: "3vw" }}>
+                    <div className="table-responsive">
+                        <Table striped hover className="tabla-pc table w-100">
+                            <thead className="table-dark">
+                                <tr>
+                                    <th className="align-middle" scope="col">
+                                        CODIGO
+                                    </th>
+                                    <th className="align-middle col-2 text-center" scope="col">
+                                        IMAGEN
+                                    </th>
+                                    <th className="align-middle col-6" scope="col">
+                                        PRODUCTO
+                                    </th>
+                                    <th className="align-middle col-2 text-center" scope="col">
+                                        PRECIO
+                                    </th>
+                                    <th className="align-middle col-2 text-center" scope="col">
+                                        CANTIDAD
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody className="table-group-divider">
+                                {currentRows.map((article) => (
+                                    <tr key={article.id}>
+                                        <td className="align-middle text-end">{article.id}</td>
+                                        <td
+                                            style={{
+                                                position: "relative",
+
+                                                height: "100px",
+                                                textAlign: "center",
+                                            }}
+                                        >
+                                            <div
+                                                style={{
+                                                    display: "inline-block",
+                                                    position: "relative",
+                                                    top: "50%",
+                                                    transform: "translateY(-50%)",
+                                                }}
+                                            >
+                                                <img
+                                                    src={article.image}
+                                                    alt={article.name ?? "Nombre no disponible"}
+                                                    className="img-fluid image-hover"
+                                                    style={{
+                                                        maxWidth: "10vw",
+                                                        maxHeight: "10vw",
+                                                        display: "block",
+                                                        margin: "0 auto",
+                                                    }}
+                                                    onClick={() => openModal(article.image, article.name)}
+                                                />
+                                            </div>
+                                        </td>
+
+
+                                        <td className="align-middle col-6">{article.name}</td>
+                                        <td className="align-middle col-2 text-center">{article.price}</td>
+                                        <td className="align-middle col-2 text-end">
+                                            <Amount
+                                                onAddToCart={handleAddToCart}
+                                                selectedProductId={article.id}
+                                            />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    </div>
+
+                    <nav>
+                        <ul className="pagination pagination-sm justify-content-end">
+                            {renderPageNumbers().map((page, index) => (
+                                <li
+                                    key={index}
+                                    className={`page-item ${page === "Anterior" || page === "Siguiente"
+                                        ? ""
+                                        : currentPage === page
+                                            ? "active"
+                                            : ""
+                                        }`}
+                                >
+                                    <a
+                                        className="page-link"
+                                        href="#"
+                                        onClick={() => handlePageChange(page)}
+                                    >
+                                        {page}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                </div>
+            );
         }
     };
 
@@ -196,6 +325,7 @@ function Store() {
                                     />
                                     {category}
                                 </label>
+                                
                             ))}
                         </div>
                     </div>
@@ -294,102 +424,7 @@ function Store() {
                     </nav>
                 </div>
 
-                <div style={{ marginLeft: "3vw", marginRight: "3vw" }}>
-                    <div className="table-responsive">
-                        <Table striped hover className="table w-100">
-                            <thead className="table-dark">
-                                <tr>
-                                    <th className="align-middle" scope="col">
-                                        CODIGO
-                                    </th>
-                                    <th className="align-middle col-2 text-center" scope="col">
-                                        IMAGEN
-                                    </th>
-                                    <th className="align-middle col-6" scope="col">
-                                        PRODUCTO
-                                    </th>
-                                    <th className="align-middle col-2 text-center" scope="col">
-                                        PRECIO
-                                    </th>
-                                    <th className="align-middle col-2 text-center" scope="col">
-                                        CANTIDAD
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody className="table-group-divider">
-                                {currentRows.map((article) => (
-                                    <tr key={article.id}>
-                                        <td className="align-middle text-end">{article.id}</td>
-                                        <td
-                                            style={{
-                                                position: "relative",
-
-                                                height: "100px",
-                                                textAlign: "center",
-                                            }}
-                                        >
-                                            <div
-                                                style={{
-                                                    display: "inline-block",
-                                                    position: "relative",
-                                                    top: "50%",
-                                                    transform: "translateY(-50%)",
-                                                }}
-                                            >
-                                                <img
-                                                    src={article.image}
-                                                    alt={article.name ?? "Nombre no disponible"}
-                                                    className="img-fluid image-hover"
-                                                    style={{
-                                                        maxWidth: "10vw",
-                                                        maxHeight: "10vw",
-                                                        display: "block",
-                                                        margin: "0 auto",
-                                                    }}
-                                                    onClick={() => openModal(article.image, article.name)}
-                                                />
-                                            </div>
-                                        </td>
-
-
-                                        <td className="align-middle col-6">{article.name}</td>
-                                        <td className="align-middle col-2 text-center">{article.price}</td>
-                                        <td className="align-middle col-2 text-end">
-                                            <Amount
-                                                onAddToCart={handleAddToCart}
-                                                selectedProductId={article.id}
-                                            />
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                    </div>
-
-                    <nav>
-                        <ul className="pagination pagination-sm justify-content-end">
-                            {renderPageNumbers().map((page, index) => (
-                                <li
-                                    key={index}
-                                    className={`page-item ${page === "Anterior" || page === "Siguiente"
-                                        ? ""
-                                        : currentPage === page
-                                            ? "active"
-                                            : ""
-                                        }`}
-                                >
-                                    <a
-                                        className="page-link"
-                                        href="#"
-                                        onClick={() => handlePageChange(page)}
-                                    >
-                                        {page}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
-                </div>
+                {renderContent()}
 
                 <Modal show={showModal} onHide={closeModal}>
                     <Modal.Header closeButton>
