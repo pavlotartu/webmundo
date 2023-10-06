@@ -26,7 +26,7 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
 
   return (
     
-    <div className="product-quantity-input d-flex flex-wrap">
+    <div className="product-quantity-input">
       <div className="input-group m-2">
         <button
           className="btn btn-outline-secondary btn-sm"
@@ -58,7 +58,7 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
         disabled={selectedProductId === undefined}
       >
         <img
-          src="../src/assets/img/agregar.png"
+          src="../src/assets/img/icon/agregar.png"
           style={{ width: '25px', height: 'auto' }}
           alt="Tienda"
           className="hover-effect"

@@ -100,7 +100,7 @@ const Carrito: React.FC<CarritoProps> = ({
         <Modal.Header closeButton>
           <Modal.Title>Carrito de Compras</Modal.Title>
           <button className="btn btn-danger text-white ms-auto" onClick={handleEmptyCart} style={{ fontWeight: 'bold' }}>
-            Vaciar <img src="../src/assets/img/carro.png" style={{ width: '35px', height: 'auto' }} alt="Carro" />
+            Vaciar <img src="../src/assets/img/icon/carro.png" style={{ width: '35px', height: 'auto' }} alt="Carro" />
           </button>
         </Modal.Header>
 
@@ -180,7 +180,7 @@ const Carrito: React.FC<CarritoProps> = ({
                         style={{ fontSize: '20px' }}
                       >
                         <i className="bi bi-trash"></i> <img
-                          src="../src/assets/img/botonx.png"
+                          src="../src/assets/img/icon/botonx.png"
                           style={{ width: '35px', height: 'auto' }}
                           alt="Eliminar"
                           className="hover-effect"

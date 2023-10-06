@@ -3,6 +3,7 @@ import { getArticlesData, Article } from "../components/Key";
 import Navbar from "../components/Navbar";
 import Amount from "../components/Amount";
 import Carrito from "../components/Cart";
+import Footer from '../components/Footer';
 import { Modal, Table } from "react-bootstrap";
 
 function Store() {
@@ -172,13 +173,13 @@ function Store() {
     };
 
     const renderContent = () => {
-        if (windowWidth <= 920) {
+        if (windowWidth <= 990 ) {
             return (
                 <div className="container">
                     <div className="row">
                         {currentRows.map((article) => (
-                            <div key={article.id} className="col-6 col-sm-4 col-md-4 mb-4">
-                                <div className="card">
+                            <div key={article.id} className="col-6 col-sm-6 col-md-4 mb-4">
+                                <div className="card h-100">
                                     <img
                                         src={article.image}
                                         className="card-img-top"
@@ -248,17 +249,15 @@ function Store() {
                                                     alt={article.name ?? "Nombre no disponible"}
                                                     className="img-fluid image-hover"
                                                     style={{
-                                                        maxWidth: "10vw",
-                                                        maxHeight: "10vw",
-                                                        display: "block",
-                                                        margin: "0 auto",
+                                                        width: "100px",
+                                                        height: "100px",
+                                                        objectFit: "cover",
+                                                        
                                                     }}
                                                     onClick={() => openModal(article.image, article.name)}
                                                 />
                                             </div>
                                         </td>
-
-
                                         <td className="align-middle col-6">{article.name}</td>
                                         <td className="align-middle col-2 text-center">{article.price}</td>
                                         <td className="align-middle col-2 text-end">
@@ -303,29 +302,38 @@ function Store() {
 
     return (
         <>
-            <Navbar />
+        <Navbar />
+
             <main>
                 <div className="check">
-                    <div className="d-flex align-items-center" >
-                        <div className="form-check form-switch">
+                    <div className="d-flex align-items-center">
+                        <div className="form-check form-switch d-flex flex-wrap">
                             {categories.sort().map((category, index) => (
-                                <label
-                                    key={category}
-                                    className={`btn btn-outline-primary mx-1 ${selectedCategories.includes(category) ? "active" : ""
-                                        }`}
-                                    style={{ margin: "0.5vw 0.5vw 0.5vw 0.5vw" }}
-                                >
-                                    <input
-                                        id={`check-${index}`}
-                                        type="checkbox"
-                                        className="btn-check"
-                                        value={category}
-                                        checked={selectedCategories.includes(category)}
-                                        onChange={() => handleCategoryToggle(category)}
-                                    />
-                                    {category}
-                                </label>
-                                
+                                <div key={category} className="d-flex align-items-center">
+                                    <label
+                                        className={`btn btn-outline-primary mx-1 ${selectedCategories.includes(category) ? "active" : ""
+                                            }`}
+                                        style={{ margin: "0.5vw 0.5vw 0.5vw 0.5vw" }}
+                                    >
+                                        <input
+                                            id={`check-${index}`}
+                                            type="checkbox"
+                                            className="btn-check"
+                                            value={category}
+                                            checked={selectedCategories.includes(category)}
+                                            onChange={() => handleCategoryToggle(category)}
+                                        />
+                                        {category}
+                                    </label>
+                                    <div className="dropdown">
+                                        <button type="button" className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span className="visually-hidden">Toggle Dropdown</span>
+                                        </button>
+                                        <ul className="dropdown-menu">
+                                            <li><a className="dropdown-item" href="#">Sub-Categoria pendiente</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </div>
@@ -346,7 +354,7 @@ function Store() {
                                     />
 
                                     <button className="btn" type="submit">
-                                        <img src="../src/assets/img/lupa.png" style={{ width: '35px', height: 'auto' }} className="hover-effect"></img>
+                                        <img src="../src/assets/img/icon/lupa.png" style={{ width: '35px', height: 'auto' }} className="hover-effect"></img>
                                     </button>
                                 </div>
                             </form>
@@ -361,7 +369,7 @@ function Store() {
                         style={{ fontSize: '20px', fontWeight: 'bold' }}
                     >
                         {cartTotal > 0 && <span className="small">Total: ${cartTotal.toFixed(2)}</span>
-                        } <img src="../src/assets/img/carrito.png" style={{ width: '50px', height: 'auto' }} className="hover-effect"></img>
+                        } <img src="../src/assets/img/icon/carrito.png" style={{ width: '50px', height: 'auto' }} className="hover-effect"></img>
 
                     </button>
                 </div>
@@ -380,7 +388,7 @@ function Store() {
                 >
                     <div className="d-flex  align-items-center mb-3">
                         <div className="d-flex">
-                            <label htmlFor="rowsPerPageSelect"><img src="../src/assets/img/fila.png" style={{ width: '35px', height: 'auto' }}></img></label>
+                            <label htmlFor="rowsPerPageSelect"><img src="../src/assets/img/icon/fila.png" style={{ width: '35px', height: 'auto' }}></img></label>
                             <select
                                 className="form-select form-select-sm"
                                 id="rowsPerPageSelect"
@@ -444,6 +452,8 @@ function Store() {
                     </Modal.Body>
                 </Modal>
             </main>
+                                
+            <Footer />
         </>
 
     );
