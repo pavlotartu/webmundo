@@ -5,7 +5,7 @@
 }
 
 main {
-  min-height: 50vw;
+  min-height: 100vh;
 }
 
 .logo_menu {
@@ -27,7 +27,6 @@ main {
 .transportes {
   background-color: #fd8e43;
 }
-
 
 .hover-effect:hover {
   transform: scale(1.1); 

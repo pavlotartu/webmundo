@@ -77,12 +77,11 @@ function Home() {
       </header>
 
       <main>
-        <div className="d-flex flex-wrap justify-content-center m-2">
-          <div
-            className="tienda card text-center m-2"
+        <div className="d-flex flex-wrap justify-content-center m-5">
+          <div className="tienda card text-center shadow-lg m-2"
             style={{ width: "18rem" }}
           >
-            <div className="card-body">
+            <div className="card-body ">
               <h5 className="card-title">
                 <strong>TIENDA ONLINE</strong>
               </h5>
@@ -96,7 +95,7 @@ function Home() {
             </div>
           </div>
           <div
-            className="contacto card text-center m-2"
+            className="contacto card text-center shadow-lg m-2"
             style={{ width: "18rem" }}
           >
             <div className="card-body">
@@ -113,7 +112,23 @@ function Home() {
             </div>
           </div>
           <div
-            className="pagos card text-center m-2"
+            className="pagos card text-center shadow-lg m-2"
+            style={{ width: "18rem" }}
+          >
+            <div className="card-body">
+              <h5 className="card-title">
+                <strong>¿COMO COMPRAR?</strong>
+              </h5>
+              <p className="card-text">
+                Aquí podras ver un instructivo de como realizar un pedido y realizar cambio.
+              </p>
+              <a href="#" className="btn btn-primary">
+                ¿Como Comprar?
+              </a>
+            </div>
+          </div>
+          <div
+            className="transportes card text-center shadow-lg m-2"
             style={{ width: "18rem" }}
           >
             <div className="card-body">
@@ -121,28 +136,10 @@ function Home() {
                 <strong>MEDIOS DE PAGO</strong>
               </h5>
               <p className="card-text">
-                Aquí podras ver todos los medios de pago disponibles y sus
-                descuentos.
+              Aquí podras ver todos los medios de pago disponibles, descuentos y promociones.
               </p>
               <a href="#" className="btn btn-primary">
-                Ver Medios de Pagos
-              </a>
-            </div>
-          </div>
-          <div
-            className="transportes card text-center m-2"
-            style={{ width: "18rem" }}
-          >
-            <div className="card-body">
-              <h5 className="card-title">
-                <strong>MEDIOS DE TRANSPORTE</strong>
-              </h5>
-              <p className="card-text">
-                Ingresando podras ver los distintos medios de transportes segun
-                localidad.
-              </p>
-              <a href="#" className="btn btn-primary">
-                Ver Medios de Transportes
+              Medios de Pagos
               </a>
             </div>
           </div>
@@ -223,8 +220,8 @@ function Home() {
                   <span className="visually-hidden">Next</span>
                 </a>
               </div>
-              <div className="card-body">
-                <h5 className="card-title">COTILLON</h5>
+              <div className="card-body shadow-lg">
+                <h5 className="card-title text-center">COTILLON</h5>
                 <p className="card-text" style={{ textAlign: 'justify' }}>
                   Aqui podes ver algunos de los ultimos ingresos en Cotillón.
                   Para poder ver mas productos o realizar una comprar, dirigite
@@ -304,8 +301,8 @@ function Home() {
                   <span className="visually-hidden">Next</span>
                 </a>
               </div>
-              <div className="card-body">
-                <h5 className="card-title">JUGUETES</h5>
+              <div className="card-body shadow-lg">
+                <h5 className="card-title text-center">JUGUETES</h5>
                 <p className="card-text" style={{ textAlign: 'justify' }}>
                   Aqui podes ver algunos de los ultimos ingresos en artículos de
                   jugueteria. Para poder ver mas productos o realizar una
@@ -385,8 +382,8 @@ function Home() {
                   <span className="visually-hidden">Next</span>
                 </a>
               </div>
-              <div className="card-body">
-                <h5 className="card-title">REGALERIA</h5>
+              <div className="card-body shadow-lg">
+                <h5 className="card-title text-center">REGALERIA</h5>
                 <p className="card-text" style={{ textAlign: 'justify' }}>
                   Aqui podes ver algunos de los ultimos ingresos en artículos de
                   regaleria. Para poder ver mas productos o realizar una

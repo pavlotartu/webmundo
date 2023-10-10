@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 
 function Contacto() {
@@ -18,11 +19,18 @@ function Contacto() {
     };
   }, []);
 
+  const iframeStyles = {
+    border: "0",
+    minWidth: "250px",
+    width: isDesktop ? "600px" : "250px",
+    height: isDesktop ? "500px" : "250px",
+  };
+
+
   return (
     <>
       <Navbar />
-
-      <div className="d-flex flex-wrap justify-content-center">
+      <main>      <div className="d-flex flex-wrap justify-content-center">
         <div className="d-flex flex-wrap justify-content-center m-2">
           <div
             className="tienda card text-center m-2"
@@ -69,7 +77,7 @@ function Contacto() {
                 />
                 www.instagram.com/cotillonmundoaventura
               </a>
-              <h6 className="card-title">#cotillonmundoaventura</h6>
+              <h6 className="card-title">#️⃣cotillonmundoaventura</h6>
             </div>
           </div>
         </div>
@@ -96,6 +104,7 @@ function Contacto() {
                 />
                 www.facebook.com/cotillonmundoaventura
               </a>
+              <h6 className="card-title">#️⃣cotillonmundoaventura</h6>
             </div>
           </div>
 
@@ -123,22 +132,23 @@ function Contacto() {
         </div>
       </div>
 
-      <div
-        className={`map m-2 d-flex flex-column align-items-center ${isDesktop ? "map-desktop" : ""
-          }`}
-      >
-        <h3 className="text-center">Cotillón Mundo Aventura</h3>
-        <h6 className="text-center">9 de Julio 1764 - San Justo (SF)</h6>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13709.766716366696!2d-60.5823471!3d-30.7902459!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x944ad7a1b510c147%3A0x74894eb75b0033c!2sCotill%C3%B3n%20Mundo%20Aventura!5e0!3m2!1ses-419!2sar!4v1696603511551!5m2!1ses-419!2sar"
-          width={isDesktop ? "600" : "250"}
-          height={isDesktop ? "500" : "250"}
-          style={{ border: "0", minWidth: "250px" }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
+        <div
+          className={`map m-2 d-flex flex-column align-items-center ${isDesktop ? "map-desktop" : ""
+            }`}
+        >
+          <h3 className="text-center">Cotillón Mundo Aventura</h3>
+          <h6 className="text-center">9 de Julio 1764 - San Justo (SF)</h6>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13709.766716366696!2d-60.5823471!3d-30.7902459!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x944ad7a1b510c147%3A0x74894eb75b0033c!2sCotill%C3%B3n%20Mundo%20Aventura!5e0!3m2!1ses-419!2sar!4v1696624455775!5m2!1ses-419!2sar"
+            style={iframeStyles}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+
+        </div>
+      </main>
+      <Footer />
     </>
   );
 }

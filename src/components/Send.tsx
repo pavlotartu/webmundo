@@ -296,8 +296,8 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 <td className="text-center">{item.id}</td>
                                 <td>{item.name}</td>
                                 <td className="text-center">{item.quantity}</td>
-                                <td className="text-end">${item.price}</td>
-                                <td className="text-end">${item.price * item.quantity}</td>
+                                <td className="text-end">${item.price + ",00"}</td>
+                                <td className="text-end">${item.price * item.quantity + ",00"}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -309,8 +309,8 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                     Total: $
                                     {cartItems.reduce(
                                         (total, item) => total + item.price * item.quantity,
-                                        0
-                                    )}
+                                        0 
+                                    )},00
                                 </strong>
                             </td>
                         </tr>

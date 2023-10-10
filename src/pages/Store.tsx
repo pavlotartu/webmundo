@@ -25,6 +25,7 @@ function Store() {
     const [showCartModal, setShowCartModal] = useState(false);
     const [cartTotal, setCartTotal] = useState<number>(0);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [hayResultadosDeBusqueda, setHayResultadosDeBusqueda] = useState(true);
 
     const calculateCartTotal = () => {
         const total = cartItems.reduce((acc, item) => {
@@ -71,8 +72,16 @@ function Store() {
     }, []);
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchText(event.target.value);
+        const newText = event.target.value;
+        setSearchText(newText);
+
+        // Filtra los artículos en función del texto de búsqueda y actualiza la variable de estado
+        const filteredArticles = articles.filter((article) =>
+            article.name.toLowerCase().includes(newText.toLowerCase())
+        );
+        setHayResultadosDeBusqueda(filteredArticles.length > 0);
     };
+
 
     const handleCategoryToggle = (category: string) => {
         if (selectedCategories.includes(category)) {
@@ -173,33 +182,53 @@ function Store() {
     };
 
     const renderContent = () => {
-        if (windowWidth <= 990 ) {
+        if (windowWidth <= 990) {
             return (
                 <div className="container">
                     <div className="row">
-                        {currentRows.map((article) => (
-                            <div key={article.id} className="col-6 col-sm-6 col-md-4 mb-4">
-                                <div className="card h-100">
-                                    <img
-                                        src={article.image}
-                                        className="card-img-top"
-                                        alt={article.name ?? "Nombre no disponible"}
-                                        onClick={() => openModal(article.image, article.name)}
-                                    />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{article.name}</h5>
-                                        <p className="card-text">Precio: ${article.price}</p>
-                                        <Amount
-                                            onAddToCart={handleAddToCart}
-                                            selectedProductId={article.id}
+                        {articles.length > 0 ? (
+                            currentRows.map((article) => (
+                                <div key={article.id} className="col-6 col-sm-6 col-md-4 mb-4">
+                                    <div className="card">
+                                        <img
+                                            src={article.image}
+                                            className="card-img-top"
+                                            alt={article.name ?? "Nombre no disponible"}
+                                            onClick={() => openModal(article.image, article.name)}
                                         />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{article.name}</h5>
+                                            <p className="card-text">Precio: ${article.price.toFixed(2)}</p>
+                                            <Amount
+                                                onAddToCart={handleAddToCart}
+                                                selectedProductId={article.id}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="col-6 col-sm-6 col-md-4 mb-4">
+                                <div className="card" aria-hidden="true">
+                                    <img src="./src/assets/img/news/imgris.png" className="card-img-top" alt="imgris" />
+                                    <div className="card-body">
+                                        <h5 className="card-title placeholder-glow">
+                                            <span className="placeholder col-6"></span>
+                                        </h5>
+                                        <p className="card-text placeholder-glow">
+                                            <span className="placeholder col-6"></span>
+                                            <span className="placeholder col-sm-6"></span>
+                                            <span className="placeholder col-md-4"></span>
+                                        </p>
+                                        <a className="btn disabled placeholder col-6" aria-disabled="true"></a>
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        )}
                     </div>
                 </div>
             );
+
         } else {
             return (
                 <div style={{ marginLeft: "3vw", marginRight: "3vw" }}>
@@ -225,49 +254,86 @@ function Store() {
                                 </tr>
                             </thead>
                             <tbody className="table-group-divider">
-                                {currentRows.map((article) => (
-                                    <tr key={article.id}>
-                                        <td className="align-middle text-end">{article.id}</td>
-                                        <td
-                                            style={{
-                                                position: "relative",
-
-                                                height: "100px",
-                                                textAlign: "center",
-                                            }}
-                                        >
+                                {articles.length > 0 ? (
+                                    currentRows.map((article) => (
+                                        <tr key={article.id}>
+                                            <td className="align-middle text-end">{article.id}</td>
+                                            <td className="align-middle col-2 text-center">
+                                                <div
+                                                    style={{
+                                                        position: "relative",
+                                                        height: "100px",
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={article.image}
+                                                        alt={article.name ?? "Nombre no disponible"}
+                                                        className="img-fluid image-hover border rounded"
+                                                        style={{
+                                                            width: "100px",
+                                                            height: "100px",
+                                                            objectFit: "cover",
+                                                        }}
+                                                        onClick={() => openModal(article.image, article.name)}
+                                                    />
+                                                </div>
+                                            </td>
+                                            <td className="align-middle col-6">{article.name}</td>
+                                            <td className="align-middle col-2 text-center">
+                                                ${article.price.toFixed(2)}
+                                            </td>
+                                            <td className="align-middle col-2 text-end">
+                                                <Amount
+                                                    onAddToCart={handleAddToCart}
+                                                    selectedProductId={article.id}
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td className="align-middle text-end placeholder-glow"></td>
+                                        <td className="align-middle col-2 text-center">
                                             <div
                                                 style={{
-                                                    display: "inline-block",
                                                     position: "relative",
-                                                    top: "50%",
-                                                    transform: "translateY(-50%)",
+                                                    height: "100px",
+                                                    textAlign: "center",
                                                 }}
                                             >
                                                 <img
-                                                    src={article.image}
-                                                    alt={article.name ?? "Nombre no disponible"}
-                                                    className="img-fluid image-hover"
+                                                    src="./src/assets/img/news/imgris.png"
+                                                    className="img-fluid image-hover border rounded"
                                                     style={{
                                                         width: "100px",
                                                         height: "100px",
                                                         objectFit: "cover",
-                                                        
                                                     }}
-                                                    onClick={() => openModal(article.image, article.name)}
+                                                    alt="imgris"
                                                 />
                                             </div>
                                         </td>
-                                        <td className="align-middle col-6">{article.name}</td>
-                                        <td className="align-middle col-2 text-center">{article.price}</td>
+                                        <td className="align-middle col-6">
+                                            <h5 className="card-title placeholder-glow">
+                                                <span className="placeholder col-6"></span>
+                                            </h5>
+                                            <p className="card-text placeholder-glow">
+                                                <span className="placeholder col-7"></span>
+                                                <span className="placeholder col-4"></span>
+                                                <span className="placeholder col-4"></span>
+                                                <span className="placeholder col-6"></span>
+                                                <span className="placeholder col-8"></span>
+                                            </p>
+                                        </td>
+                                        <td className="align-middle col-2 text-center">
+                                            <span className="placeholder col-6"></span>
+                                        </td>
                                         <td className="align-middle col-2 text-end">
-                                            <Amount
-                                                onAddToCart={handleAddToCart}
-                                                selectedProductId={article.id}
-                                            />
+                                            <span className="placeholder col-6"></span>
                                         </td>
                                     </tr>
-                                ))}
+                                )}
                             </tbody>
                         </Table>
                     </div>
@@ -295,14 +361,16 @@ function Store() {
                             ))}
                         </ul>
                     </nav>
+
                 </div>
             );
         }
     };
 
+
     return (
         <>
-        <Navbar />
+            <Navbar />
 
             <main>
                 <div className="check">
@@ -434,6 +502,16 @@ function Store() {
 
                 {renderContent()}
 
+                {!hayResultadosDeBusqueda && (
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12 text-center" id="no-results-message">
+                                No se encontraron resultados para la busqueda.
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 <Modal show={showModal} onHide={closeModal}>
                     <Modal.Header closeButton>
                         <Modal.Title>{selectedProductName}</Modal.Title>
@@ -452,7 +530,7 @@ function Store() {
                     </Modal.Body>
                 </Modal>
             </main>
-                                
+
             <Footer />
         </>
 

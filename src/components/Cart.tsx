@@ -99,9 +99,6 @@ const Carrito: React.FC<CarritoProps> = ({
       <Modal show={showModal} onHide={closeModal} dialogClassName="modal-lg">
         <Modal.Header closeButton>
           <Modal.Title>Carrito de Compras</Modal.Title>
-          <button className="btn btn-danger text-white ms-auto" onClick={handleEmptyCart} style={{ fontWeight: 'bold' }}>
-            Vaciar <img src="../src/assets/img/icon/carro.png" style={{ width: '35px', height: 'auto' }} alt="Carro" />
-          </button>
         </Modal.Header>
 
         <Modal.Body>
@@ -171,8 +168,8 @@ const Carrito: React.FC<CarritoProps> = ({
                         </div>
                       </div>
                     </td>
-                    <td className="align-middle text-end">${item.price}</td>
-                    <td className="align-middle text-end">${item.price * (item.quantity || 1)}</td>
+                    <td className="align-middle text-end">${item.price + ",00"}</td>
+                    <td className="align-middle text-end">${item.price * (item.quantity || 1)},00</td>
                     <td className="align-middle text-center">
                       <button
                         className="btn "
@@ -196,7 +193,7 @@ const Carrito: React.FC<CarritoProps> = ({
                   <td className="col-2">
                     <div className="d-flex justify-content-between">
                       <span>Total:</span>
-                      <span>${calculateTotal()}</span>
+                      <span>${calculateTotal()},00</span>
                     </div>
                   </td>
                 </tr>
@@ -205,6 +202,9 @@ const Carrito: React.FC<CarritoProps> = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
+        <button className="btn btn-danger text-white ms-auto" onClick={handleEmptyCart} style={{ fontWeight: 'bold' }}>
+            Vaciar Carrito
+          </button>
           {cartItems.length > 0 && (
             <Button variant="primary" onClick={handleCloseCartModal}>
               Realizar Compra
