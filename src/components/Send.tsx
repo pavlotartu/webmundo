@@ -27,7 +27,6 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
-
         if (name === "userEmail") {
             setIsEmailValid(validateEmail(value));
         }
@@ -51,7 +50,6 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
     };
 
     const handleSubmit = () => {
-
         if (
             !formData.firstName ||
             !formData.lastName ||
@@ -77,7 +75,6 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
         );
         doc.text(`Teléfono de Contacto: ${formData.phoneNumber}`, 10, 40);
 
-        const tableHeaders = ['Código', 'Producto', 'Cantidad', 'Precio', 'Subtotal'];
         const tableData = cartItems.map((item) => [
             item.id,
             item.name,
@@ -90,7 +87,6 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
         const lineHeight = 10;
 
         autoTable(doc, {
-            head: [tableHeaders],
             body: tableData,
             startY: yOffset,
             theme: 'plain',
@@ -118,36 +114,31 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
             return;
         }
 
-        const tableHeaders = ['Código', 'Producto', 'Cantidad', 'Precio', 'Subtotal'];
-        const tableData = cartItems.map((item) => [
-            item.id,
-            item.name,
-            item.quantity,
-            `$${item.price}`,
-            `$${item.price * item.quantity}`,
-        ]);
+        const tableData = cartItems.map((item) => `
+        <tr>
+            <td>${item.id}</td>
+            <td>${item.name}</td>
+            <td>${item.quantity}</td>
+            <td>$${item.price}</td>
+            <td>$${item.price * item.quantity}</td>
+        </tr>
+    `).join('');
 
         const total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
-        const message = `
-            Nombre: ${formData.firstName} ${formData.lastName}
-            Dirección: ${formData.address}, ${formData.city}, ${formData.province}
-            Teléfono de Contacto: ${formData.phoneNumber}
-            Correo Electrónico: ${formData.userEmail}
-        
-            Pedido:
-
-            ${tableHeaders.join('\t')}
-            ${tableData.map(row => row.join('\t')).join('\n')}
-            
-            Total: $${total}
-        `;
-
         const emailParams = {
             userEmail: formData.userEmail,
-            message,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            address: formData.address,
+            city: formData.city,
+            province: formData.province,
+            phoneNumber: formData.phoneNumber,
+            tableData: tableData,
+            total: total
         };
 
+/* mis credenciales */
 
 
         emailjs.send(serviceID, templateID, emailParams)
@@ -296,8 +287,8 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 <td className="text-center">{item.id}</td>
                                 <td>{item.name}</td>
                                 <td className="text-center">{item.quantity}</td>
-                                <td className="text-end">${item.price + ",00"}</td>
-                                <td className="text-end">${item.price * item.quantity + ",00"}</td>
+                                <td className="text-end">${item.price}</td>
+                                <td className="text-end">${item.price * item.quantity}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -309,8 +300,8 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                     Total: $
                                     {cartItems.reduce(
                                         (total, item) => total + item.price * item.quantity,
-                                        0 
-                                    )},00
+                                        0
+                                    )}
                                 </strong>
                             </td>
                         </tr>

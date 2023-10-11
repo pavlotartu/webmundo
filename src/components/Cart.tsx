@@ -129,7 +129,7 @@ const Carrito: React.FC<CarritoProps> = ({
                         top: "50%",
                         transform: "translateY(-50%)"
                       }}>
-                        <img
+                        <img className="img-fluid image-hover border rounded"
                           src={item.image}
                           alt={item.name || "Nombre no disponible"}
                           style={{

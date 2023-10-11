@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
-
+/* mis credenciales */
 };
 
 const app = initializeApp(firebaseConfig);

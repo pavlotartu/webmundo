@@ -75,7 +75,6 @@ function Store() {
         const newText = event.target.value;
         setSearchText(newText);
 
-        // Filtra los artículos en función del texto de búsqueda y actualiza la variable de estado
         const filteredArticles = articles.filter((article) =>
             article.name.toLowerCase().includes(newText.toLowerCase())
         );
@@ -367,7 +366,6 @@ function Store() {
         }
     };
 
-
     return (
         <>
             <Navbar />
@@ -518,7 +516,7 @@ function Store() {
                     </Modal.Header>
                     <Modal.Body>
                         {selectedImage && (
-                            <img
+                            <img className="rounded"
                                 src={selectedImage}
                                 alt={selectedProductName ?? "Nombre no disponible"}
                                 style={{
