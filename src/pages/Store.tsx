@@ -38,7 +38,6 @@ function Store() {
         const fetchData = async () => {
             const data = await getArticlesData();
             setArticles(data);
-
             const uniqueCategories = Array.from(
                 new Set(data.map((article) => article.category || ""))
             );
@@ -54,18 +53,15 @@ function Store() {
 
     useEffect(() => {
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
-
         const total = calculateCartTotal();
         setCartTotal(total);
     }, [cartItems]);
-
     const handleResize = () => {
         setWindowWidth(window.innerWidth);
     };
 
     useEffect(() => {
         window.addEventListener("resize", handleResize);
-
         return () => {
             window.removeEventListener("resize", handleResize);
         };
@@ -74,13 +70,11 @@ function Store() {
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newText = event.target.value;
         setSearchText(newText);
-
         const filteredArticles = articles.filter((article) =>
             article.name.toLowerCase().includes(newText.toLowerCase())
         );
         setHayResultadosDeBusqueda(filteredArticles.length > 0);
     };
-
 
     const handleCategoryToggle = (category: string) => {
         if (selectedCategories.includes(category)) {
@@ -132,15 +126,12 @@ function Store() {
         if (currentPage > 1) {
             pages.push("Anterior");
         }
-
         for (let page = start; page <= end; page++) {
             pages.push(page);
         }
-
         if (currentPage < totalPages) {
             pages.push("Siguiente");
         }
-
         return pages;
     };
 
@@ -187,8 +178,8 @@ function Store() {
                     <div className="row">
                         {articles.length > 0 ? (
                             currentRows.map((article) => (
-                                <div key={article.id} className="col-6 col-sm-6 col-md-4 mb-4">
-                                    <div className="card">
+                                <div key={article.id} className="col-12 col-sm-6 col-md-4 mb-5">
+                                    <div className="card h-100">
                                         <img
                                             src={article.image}
                                             className="card-img-top"
@@ -196,8 +187,14 @@ function Store() {
                                             onClick={() => openModal(article.image, article.name)}
                                         />
                                         <div className="card-body">
-                                            <h5 className="card-title">{article.name}</h5>
-                                            <p className="card-text">Precio: ${article.price.toFixed(2)}</p>
+                                            <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+                                                {article.name}
+                                            </h5>
+                                            <p className="card-text" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
+                                                Precio: ${article.price.toFixed(2)}
+                                            </p>
+                                        </div>
+                                        <div className="card-footer">
                                             <Amount
                                                 onAddToCart={handleAddToCart}
                                                 selectedProductId={article.id}
@@ -234,8 +231,8 @@ function Store() {
                     <div className="table-responsive">
                         <Table striped hover className="tabla-pc table w-100">
                             <thead className="table-dark">
-                                <tr>
-                                    <th className="align-middle" scope="col">
+                                <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+                                    <th className="align-middle text-center" scope="col">
                                         CODIGO
                                     </th>
                                     <th className="align-middle col-2 text-center" scope="col">
@@ -255,27 +252,25 @@ function Store() {
                             <tbody className="table-group-divider">
                                 {articles.length > 0 ? (
                                     currentRows.map((article) => (
-                                        <tr key={article.id}>
-                                            <td className="align-middle text-end">{article.id}</td>
+                                        <tr key={article.id} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
+                                            <td className="align-middle text-center">{article.id}</td>
                                             <td className="align-middle col-2 text-center">
                                                 <div
                                                     style={{
                                                         position: "relative",
                                                         height: "100px",
                                                         textAlign: "center",
-                                                    }}
-                                                >
+                                                    }}>
                                                     <img
                                                         src={article.image}
                                                         alt={article.name ?? "Nombre no disponible"}
-                                                        className="img-fluid image-hover border rounded"
+                                                        className="img-fluid image-hover border rounded img-thumbnail"
                                                         style={{
                                                             width: "100px",
                                                             height: "100px",
                                                             objectFit: "cover",
                                                         }}
-                                                        onClick={() => openModal(article.image, article.name)}
-                                                    />
+                                                        onClick={() => openModal(article.image, article.name)} />
                                                 </div>
                                             </td>
                                             <td className="align-middle col-6">{article.name}</td>
@@ -299,8 +294,7 @@ function Store() {
                                                     position: "relative",
                                                     height: "100px",
                                                     textAlign: "center",
-                                                }}
-                                            >
+                                                }}>
                                                 <img
                                                     src="./src/assets/img/news/imgris.png"
                                                     className="img-fluid image-hover border rounded"
@@ -347,8 +341,7 @@ function Store() {
                                         : currentPage === page
                                             ? "active"
                                             : ""
-                                        }`}
-                                >
+                                        }`}>
                                     <a
                                         className="page-link"
                                         href="#"
@@ -360,7 +353,6 @@ function Store() {
                             ))}
                         </ul>
                     </nav>
-
                 </div>
             );
         }
@@ -371,7 +363,7 @@ function Store() {
             <Navbar />
 
             <main>
-                <div className="check">
+                <div className="check" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
                     <div className="d-flex align-items-center">
                         <div className="form-check form-switch d-flex flex-wrap">
                             {categories.sort().map((category, index) => (
@@ -416,8 +408,7 @@ function Store() {
                                         id="search-input"
                                         value={searchText}
                                         onChange={handleSearchChange}
-
-                                    />
+                                        style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }} />
 
                                     <button className="btn" type="submit">
                                         <img src="../src/assets/img/icon/lupa.png" style={{ width: '35px', height: 'auto' }} className="hover-effect"></img>
@@ -428,15 +419,17 @@ function Store() {
                     </nav>
                 </div>
 
-                <div className="d-flex justify-content-end btn-lg" style={{ marginRight: "2.5vw" }}>
+                <div className="d-flex justify-content-end btn-lg" style={{ marginRight: "1vw", fontFamily: 'Open Sans, sans-serif', fontWeight: 300 }}>
                     <button
-                        className="btn  m-2"
+                        className="btn  m-2 border-0"
                         onClick={() => setShowCartModal(true)}
                         style={{ fontSize: '20px', fontWeight: 'bold' }}
                     >
                         {cartTotal > 0 && <span className="small">Total: ${cartTotal.toFixed(2)}</span>
-                        } <img src="../src/assets/img/icon/carrito.png" style={{ width: '50px', height: 'auto' }} className="hover-effect"></img>
-
+                        } <img src="../src/assets/img/icon/carro.png" style={{ width: '50px', height: 'auto' }} className="hover-effect"></img>
+                        <span className="translate-middle badge rounded-pill bg-danger">
+                            {cartItems.length}
+                        </span>
                     </button>
                 </div>
 
@@ -450,8 +443,7 @@ function Store() {
 
                 <div
                     className="d-flex justify-content-between"
-                    style={{ marginLeft: "3vw", marginRight: "3vw" }}
-                >
+                    style={{ marginLeft: "3vw", marginRight: "3vw" }}>
                     <div className="d-flex  align-items-center mb-3">
                         <div className="d-flex">
                             <label htmlFor="rowsPerPageSelect"><img src="../src/assets/img/icon/fila.png" style={{ width: '35px', height: 'auto' }}></img></label>
@@ -473,7 +465,7 @@ function Store() {
                             </select>
                         </div>
                     </div>
-                    <nav className="d-flex flex-wrap align-content-end">
+                    <nav className="d-flex flex-wrap align-content-end" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300 }}>
                         <ul className="pagination pagination-sm justify-content-end">
                             {renderPageNumbers().map((page, index) => (
                                 <li
@@ -483,8 +475,7 @@ function Store() {
                                         : currentPage === page
                                             ? "active"
                                             : ""
-                                        }`}
-                                >
+                                        }`}>
                                     <a
                                         className="page-link"
                                         href="#"
@@ -510,13 +501,13 @@ function Store() {
                     </div>
                 )}
 
-                <Modal show={showModal} onHide={closeModal}>
+                <Modal show={showModal} onHide={closeModal} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                     <Modal.Header closeButton>
                         <Modal.Title>{selectedProductName}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {selectedImage && (
-                            <img className="rounded"
+                            <img className="img-fluid image-hover border rounded img-thumbnail"
                                 src={selectedImage}
                                 alt={selectedProductName ?? "Nombre no disponible"}
                                 style={{
@@ -528,10 +519,8 @@ function Store() {
                     </Modal.Body>
                 </Modal>
             </main>
-
             <Footer />
         </>
-
     );
 }
 

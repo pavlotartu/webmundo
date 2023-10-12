@@ -39,4 +39,3 @@ export const getArticlesData = async () => {
 
     return articlesData;
 };
-

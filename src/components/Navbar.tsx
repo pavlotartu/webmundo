@@ -5,7 +5,6 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function CustomNavbar() {
     const location = useLocation();
-
     const isHomeActive = location.pathname === '/';
     const isStoreActive = location.pathname === '/store';
     const isContactoActive = location.pathname === '/contacto';
@@ -24,42 +23,42 @@ function CustomNavbar() {
                         <Nav>
                             <Nav.Item>
                                 <Nav.Link as={NavLink} to="/" className={`mr-3 text-center ${isHomeActive ? 'active' : ''}`}>
-                                    <div>
+                                    <div style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                                         <img
                                             src="../src/assets/img/icon/home.png"
                                             style={{ width: '30px', height: 'auto', color: isHomeActive ? 'blue' : 'black' }}
                                             alt="Home"
                                             className="hover-effect"
                                         />
-                                        <div style={{ color: isHomeActive ? '#779fc5' : 'black', fontWeight: isHomeActive ? 'bold' : 'normal' }}>Home</div>
+                                        <div style={{ color: isHomeActive ? '#779fc5' : 'black', fontWeight: isHomeActive ? 'bold' : 'normal' }}> <strong>Home</strong></div>
                                     </div>
                                 </Nav.Link>
                             </Nav.Item>
 
                             <Nav.Item>
                                 <Nav.Link as={NavLink} to="/store" className={`mr-3 text-center ${isStoreActive ? 'active' : ''}`}>
-                                    <div>
+                                    <div style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                                         <img
                                             src="../src/assets/img/icon/tienda.png"
                                             style={{ width: '30px', height: 'auto', color: isStoreActive ? 'blue' : 'black' }}
                                             alt="Tienda"
                                             className="hover-effect"
                                         />
-                                        <div style={{ color: isStoreActive ? '#779fc5' : 'black', fontWeight: isStoreActive ? 'bold' : 'normal' }}>Tienda</div>
+                                        <div style={{ color: isStoreActive ? '#779fc5' : 'black', fontWeight: isStoreActive ? 'bold' : 'normal' }}><strong>Tienda</strong></div>
                                     </div>
                                 </Nav.Link>
                             </Nav.Item>
 
                             <Nav.Item>
                                 <Nav.Link as={NavLink} to="/contacto" className={`mr-3 text-center ${isContactoActive ? 'active' : ''}`}>
-                                    <div>
+                                    <div style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                                         <img
                                             src="../src/assets/img/icon/llamar.png"
                                             style={{ width: '30px', height: 'auto', color: isContactoActive ? 'blue' : 'black' }}
                                             alt="Contacto"
                                             className="hover-effect"
                                         />
-                                        <div style={{ color: isContactoActive ? '#779fc5' : 'black', fontWeight: isContactoActive ? 'bold' : 'normal' }}>Contacto</div>
+                                        <div style={{ color: isContactoActive ? '#779fc5' : 'black', fontWeight: isContactoActive ? 'bold' : 'normal' }}> <strong>Contacto</strong></div>
                                     </div>
                                 </Nav.Link>
                             </Nav.Item>

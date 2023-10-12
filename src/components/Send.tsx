@@ -147,7 +147,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                 setTimeout(() => {
                     clearCart();
                     window.location.reload();
-                }, 1000);
+                }, 600);
             })
             .catch((error) => {
                 alert('Hubo un error al enviar el pedido por correo: ' + error);
@@ -169,8 +169,8 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                 <Form>
                     <Form.Group className="row">
                         <div className="col-md-6">
-                            <Form.Label htmlFor="firstName">Nombre</Form.Label>
-                            <Form.Control
+                            <Form.Label htmlFor="firstName" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Nombre</strong> </Form.Label>
+                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
                                 type="text"
                                 id="firstName"
                                 name="firstName"
@@ -178,12 +178,11 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 value={formData.firstName}
                                 onChange={handleInputChange}
                                 autoComplete="given-name"
-                                required
-                            />
+                                required/>
                         </div>
                         <div className="col-md-6">
-                            <Form.Label htmlFor="lastName">Apellido</Form.Label>
-                            <Form.Control
+                            <Form.Label htmlFor="lastName" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Apellido</strong></Form.Label>
+                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
                                 type="text"
                                 id="lastName"
                                 name="lastName"
@@ -191,15 +190,14 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 value={formData.lastName}
                                 onChange={handleInputChange}
                                 autoComplete="family-name"
-                                required
-                            />
+                                required/>
                         </div>
                     </Form.Group>
 
                     <Form.Group className="row">
                         <div className="col-md-4">
-                            <Form.Label htmlFor="address">Dirección</Form.Label>
-                            <Form.Control
+                            <Form.Label htmlFor="address" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Dirección</strong></Form.Label>
+                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
                                 type="text"
                                 id="address"
                                 name="address"
@@ -207,12 +205,11 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 value={formData.address}
                                 onChange={handleInputChange}
                                 autoComplete="address-line1"
-                                required
-                            />
+                                required/>
                         </div>
                         <div className="col-md-4">
-                            <Form.Label htmlFor="city">Ciudad</Form.Label>
-                            <Form.Control
+                            <Form.Label htmlFor="city"> <strong>Ciudad</strong></Form.Label>
+                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
                                 type="text"
                                 id="city"
                                 name="city"
@@ -220,12 +217,11 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 value={formData.city}
                                 onChange={handleInputChange}
                                 autoComplete="address-level2"
-                                required
-                            />
+                                required/>
                         </div>
                         <div className="col-md-4">
-                            <Form.Label htmlFor="province">Provincia</Form.Label>
-                            <Form.Control
+                            <Form.Label htmlFor="province" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Provincia</strong></Form.Label>
+                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
                                 type="text"
                                 id="province"
                                 name="province"
@@ -233,15 +229,14 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 placeholder="Provincia Obligatorio"
                                 onChange={handleInputChange}
                                 autoComplete="address-level1"
-                                required
-                            />
+                                required/>
                         </div>
                     </Form.Group>
 
                     <Form.Group className="row">
                         <div className="col-md-6">
-                            <Form.Label htmlFor="phoneNumber">Teléfono de Contacto</Form.Label>
-                            <Form.Control
+                            <Form.Label htmlFor="phoneNumber" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Teléfono de Contacto</strong></Form.Label>
+                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
                                 type="tel"
                                 id="phoneNumber"
                                 name="phoneNumber"
@@ -249,15 +244,12 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 value={formData.phoneNumber}
                                 onChange={handleInputChange}
                                 autoComplete="tel"
-                                required
-
-
-                            />
+                                required/>
                         </div>
 
                         <div className="col-md-6">
-                            <Form.Label htmlFor="userEmail">Correo Electrónico</Form.Label>
-                            <Form.Control
+                            <Form.Label htmlFor="userEmail" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Correo Electrónico</strong> </Form.Label>
+                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
                                 type="email"
                                 id="userEmail"
                                 name="userEmail"
@@ -271,9 +263,9 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                     </Form.Group>
                 </Form>
 
-                <Table striped hover className="responsive-table">
+                <Table striped hover className="responsive-table my-4">
                     <thead>
-                        <tr>
+                        <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                             <th className="text-center">Código</th>
                             <th>Producto</th>
                             <th className="text-center">Cantidad</th>
@@ -283,7 +275,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                     </thead>
                     <tbody>
                         {cartItems.map((item) => (
-                            <tr key={item.id}>
+                            <tr key={item.id} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
                                 <td className="text-center">{item.id}</td>
                                 <td>{item.name}</td>
                                 <td className="text-center">{item.quantity}</td>
@@ -293,7 +285,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                         ))}
                     </tbody>
                     <tfoot>
-                        <tr>
+                        <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                             <td colSpan={4}></td>
                             <td>
                                 <strong>
@@ -311,6 +303,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
 
             <Modal.Footer>
                 <Button
+                    style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
                     variant="primary"
                     onClick={handleSubmit}
                     disabled={
@@ -322,11 +315,11 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                         !formData.phoneNumber ||
                         !formData.userEmail ||
                         !isEmailValid
-                    }
-                >
+                    }>
                     Descargar Pedido
                 </Button>
                 <Button
+                    style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
                     variant="success"
                     onClick={handleEmailSubmit}
                     disabled={
@@ -338,8 +331,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                         !formData.phoneNumber ||
                         !formData.userEmail ||
                         !isEmailValid
-                    }
-                >
+                    }>
                     Enviar Pedido por Email
                 </Button>
             </Modal.Footer>

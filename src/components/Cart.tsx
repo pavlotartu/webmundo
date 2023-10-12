@@ -43,7 +43,6 @@ const Carrito: React.FC<CarritoProps> = ({
     }
   }, []);
 
-
   const calculateTotal = () => {
     let total = 0;
     cartItems.forEach((item) => {
@@ -96,29 +95,29 @@ const Carrito: React.FC<CarritoProps> = ({
 
   return (
     <div>
-      <Modal show={showModal} onHide={closeModal} dialogClassName="modal-lg">
+      <Modal show={showModal} onHide={closeModal} dialogClassName="custom-modal-width modal-md modal-lg modal-xl">
         <Modal.Header closeButton>
-          <Modal.Title>Carrito de Compras</Modal.Title>
+          <Modal.Title style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Carrito de Compras</strong></Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <div className="table-responsive">
             <Table striped hover className="responsive-table">
               <thead>
-                <tr>
-                  <th>Código</th>
-                  <th>Imagen</th>
+                <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+                  <th className="text-center">Código</th>
+                  <th className="text-center">Imagen</th>
                   <th className="col-md-4">Producto</th>
                   <th className="col-md-2 text-center">Cantidad</th>
-                  <th>Precio</th>
-                  <th>Total</th>
+                  <th className="text-center">Precio</th>
+                  <th className="text-center">Total</th>
                   <th className="text-center">Acciones</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
                 {cartItems.map((item, index) => (
                   <tr key={index}>
-                    <td className="align-middle text-end">{item.id}</td>
+                    <td className="align-middle text-end text-center">{item.id}</td>
                     <td style={{
                       position: "relative",
                       verticalAlign: "middle",
@@ -129,15 +128,14 @@ const Carrito: React.FC<CarritoProps> = ({
                         top: "50%",
                         transform: "translateY(-50%)"
                       }}>
-                        <img className="img-fluid image-hover border rounded"
+                        <img className="img-fluid image-hover border rounded img-thumbnail"
                           src={item.image}
                           alt={item.name || "Nombre no disponible"}
                           style={{
                             width: "100%",
                             height: "100%",
                             objectFit: "cover",
-                          }}
-                        />
+                          }}/>
                       </div>
                     </td>
                     <td className="align-middle">{item.name}</td>
@@ -172,7 +170,7 @@ const Carrito: React.FC<CarritoProps> = ({
                     <td className="align-middle text-end">${item.price * (item.quantity || 1)},00</td>
                     <td className="align-middle text-center">
                       <button
-                        className="btn "
+                        className="btn border-0"
                         onClick={() => handleRemoveFromCart(index)}
                         style={{ fontSize: '20px' }}
                       >
@@ -202,11 +200,11 @@ const Carrito: React.FC<CarritoProps> = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-        <button className="btn btn-danger text-white ms-auto" onClick={handleEmptyCart} style={{ fontWeight: 'bold' }}>
+          <button className="btn btn-danger text-white ms-auto" onClick={handleEmptyCart} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
             Vaciar Carrito
           </button>
           {cartItems.length > 0 && (
-            <Button variant="primary" onClick={handleCloseCartModal}>
+            <Button variant="primary" onClick={handleCloseCartModal} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
               Realizar Compra
             </Button>
           )}

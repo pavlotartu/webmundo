@@ -25,14 +25,13 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
   };
 
   return (
-    
+
     <div className="product-quantity-input">
       <div className="input-group m-2">
         <button
           className="btn btn-outline-secondary btn-sm"
           type="button"
-          onClick={handleDecrement}
-        >
+          onClick={handleDecrement}>
           -
         </button>
         <input
@@ -41,19 +40,17 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
           value={quantity}
           readOnly
           id={`quantity-input-${selectedProductId}`}
-          name={`quantity-input-${selectedProductId}`}
-        />
+          name={`quantity-input-${selectedProductId}`}/>
 
         <button
           className="btn btn-outline-secondary btn-sm"
           type="button"
-          onClick={handleIncrement}
-        >
+          onClick={handleIncrement}>
           +
         </button>
       </div>
       <button
-        className="btn btn-sm m-auto "
+        className="btn btn-sm m-auto border-0 "
         onClick={handleAddToCart}
         disabled={selectedProductId === undefined}
       >
