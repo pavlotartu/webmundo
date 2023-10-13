@@ -107,10 +107,10 @@ const Carrito: React.FC<CarritoProps> = ({
                 <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                   <th className="text-center">Código</th>
                   <th className="text-center">Imagen</th>
-                  <th className="col-md-4">Producto</th>
+                  <th className="col-md-8">Producto</th>
                   <th className="col-md-2 text-center">Cantidad</th>
                   <th className="text-center">Precio</th>
-                  <th className="text-center">Total</th>
+                  <th className=" text-center">Total</th>
                   <th className="text-center">Acciones</th>
                 </tr>
               </thead>
@@ -121,6 +121,7 @@ const Carrito: React.FC<CarritoProps> = ({
                     <td style={{
                       position: "relative",
                       verticalAlign: "middle",
+                      width:"100px",
                       height: "100px"
                     }}>
                       <div style={{
@@ -166,8 +167,14 @@ const Carrito: React.FC<CarritoProps> = ({
                         </div>
                       </div>
                     </td>
-                    <td className="align-middle text-end">${item.price + ",00"}</td>
-                    <td className="align-middle text-end">${item.price * (item.quantity || 1)},00</td>
+                    <td className="align-middle text-center" style={{
+                            width: "100%",
+                            height: "100%",
+                          }}>${item.price + ",00"}</td>
+                    <td className="align-middle text-end" style={{
+                            width: "100%",
+                            height: "100%",
+                          }}>${item.price * (item.quantity || 1)},00</td>
                     <td className="align-middle text-center">
                       <button
                         className="btn border-0"

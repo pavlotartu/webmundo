@@ -138,7 +138,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
             total: total
         };
 
-/* mis credenciales */
+/* credenciales */
 
 
         emailjs.send(serviceID, templateID, emailParams)

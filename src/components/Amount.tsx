@@ -56,7 +56,7 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
       >
         <img
           src="../src/assets/img/icon/agregar.png"
-          style={{ width: '25px', height: 'auto' }}
+          style={{ width: '30px', height: 'auto' }}
           alt="Tienda"
           className="hover-effect"
         />

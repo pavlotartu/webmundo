@@ -183,7 +183,7 @@ function Home() {
               <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>MEDIOS DE PAGO</strong>
               </h5>
-              <p className="card-text" style={{ textAlign: 'justify', fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
+              <p className="card-text" style={{ textAlign: 'justify', fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
                 Aquí podras ver todos los medios de pago disponibles, descuentos y promociones.
               </p>
               <a id='como-pagar-button' className="btn btn-primary" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>

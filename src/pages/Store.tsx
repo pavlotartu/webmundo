@@ -179,10 +179,14 @@ function Store() {
                         {articles.length > 0 ? (
                             currentRows.map((article) => (
                                 <div key={article.id} className="col-12 col-sm-6 col-md-4 mb-5">
-                                    <div className="card h-100">
+                                    <div className="card">
                                         <img
                                             src={article.image}
                                             className="card-img-top"
+                                            style={{
+                                                height: "100%",
+                                                objectFit: "cover",
+                                            }}
                                             alt={article.name ?? "Nombre no disponible"}
                                             onClick={() => openModal(article.image, article.name)}
                                         />
@@ -191,7 +195,7 @@ function Store() {
                                                 {article.name}
                                             </h5>
                                             <p className="card-text" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
-                                                Precio: ${article.price.toFixed(2)}
+                                                <strong>Precio:</strong> ${article.price.toFixed(2)}
                                             </p>
                                         </div>
                                         <div className="card-footer">
@@ -235,7 +239,11 @@ function Store() {
                                     <th className="align-middle text-center" scope="col">
                                         CODIGO
                                     </th>
-                                    <th className="align-middle col-2 text-center" scope="col">
+                                    <th className="align-middle text-center" scope="col" style={{
+                                        position: "relative",
+                                        width: "100px",
+                                        textAlign: "center",
+                                    }}>
                                         IMAGEN
                                     </th>
                                     <th className="align-middle col-6" scope="col">
@@ -254,10 +262,11 @@ function Store() {
                                     currentRows.map((article) => (
                                         <tr key={article.id} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
                                             <td className="align-middle text-center">{article.id}</td>
-                                            <td className="align-middle col-2 text-center">
+                                            <td className="align-middle text-center">
                                                 <div
                                                     style={{
                                                         position: "relative",
+                                                        width: "100px",
                                                         height: "100px",
                                                         textAlign: "center",
                                                     }}>
@@ -366,35 +375,30 @@ function Store() {
                 <div className="check" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
                     <div className="d-flex align-items-center">
                         <div className="form-check form-switch d-flex flex-wrap">
-                            {categories.sort().map((category, index) => (
-                                <div key={category} className="d-flex align-items-center">
-                                    <label
-                                        className={`btn btn-outline-primary mx-1 ${selectedCategories.includes(category) ? "active" : ""
-                                            }`}
-                                        style={{ margin: "0.5vw 0.5vw 0.5vw 0.5vw" }}
-                                    >
-                                        <input
-                                            id={`check-${index}`}
-                                            type="checkbox"
-                                            className="btn-check"
-                                            value={category}
-                                            checked={selectedCategories.includes(category)}
-                                            onChange={() => handleCategoryToggle(category)}
-                                        />
-                                        {category}
-                                    </label>
-                                    <div className="dropdown">
-                                        <button type="button" className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span className="visually-hidden">Toggle Dropdown</span>
-                                        </button>
-                                        <ul className="dropdown-menu">
-                                            <li><a className="dropdown-item" href="#">Sub-Categoria pendiente</a></li>
-                                        </ul>
+                            {categories
+                                .sort()
+                                .map((category, index) => (
+                                    <div key={category} className="d-flex align-items-center">
+                                        <label
+                                            className={`btn ${selectedCategories.includes(category) ? "btn-info active" : "btn-primary"
+                                                } mx-1`}
+                                            style={{ margin: "0.5vw 0.5vw 0.5vw 0.5vw", width: "110px" }}
+                                        >
+                                            <input
+                                                id={`check-${index}`}
+                                                type="checkbox"
+                                                className="btn-check"
+                                                value={category}
+                                                checked={selectedCategories.includes(category)}
+                                                onChange={() => handleCategoryToggle(category)}
+                                            />
+                                            {category}
+                                        </label>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
                         </div>
                     </div>
+
 
                     <nav className="navbar" style={{ marginRight: "2vw" }}>
                         <div className="container-fluid">
@@ -408,7 +412,7 @@ function Store() {
                                         id="search-input"
                                         value={searchText}
                                         onChange={handleSearchChange}
-                                        style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }} />
+                                        style={{ height: "7vh", minWidth: "22vw", fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }} />
 
                                     <button className="btn" type="submit">
                                         <img src="../src/assets/img/icon/lupa.png" style={{ width: '35px', height: 'auto' }} className="hover-effect"></img>
@@ -426,8 +430,8 @@ function Store() {
                         style={{ fontSize: '20px', fontWeight: 'bold' }}
                     >
                         {cartTotal > 0 && <span className="small">Total: ${cartTotal.toFixed(2)}</span>
-                        } <img src="../src/assets/img/icon/carro.png" style={{ width: '50px', height: 'auto' }} className="hover-effect"></img>
-                        <span className="translate-middle badge rounded-pill bg-danger">
+                        } <img src="../src/assets/img/icon/carro.png" style={{ width: '55px', height: '46px' }} className="hover-effect"></img>
+                        <span className="translate-middle badge rounded-pill bg-danger" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300 }}>
                             {cartItems.length}
                         </span>
                     </button>
@@ -494,7 +498,7 @@ function Store() {
                 {!hayResultadosDeBusqueda && (
                     <div className="container">
                         <div className="row">
-                            <div className="col-12 text-center" id="no-results-message">
+                            <div className="col-12 text-center" id="no-results-message" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
                                 No se encontraron resultados para la busqueda.
                             </div>
                         </div>
