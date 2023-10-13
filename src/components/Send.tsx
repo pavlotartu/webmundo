@@ -140,7 +140,6 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
 
 /* credenciales */
 
-
         emailjs.send(serviceID, templateID, emailParams)
             .then(() => {
                 alert('¡El pedido enviado por correo exitosamente!');
