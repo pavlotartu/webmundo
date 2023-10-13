@@ -296,7 +296,9 @@ function Store() {
                                     ))
                                 ) : (
                                     <tr>
-                                        <td className="align-middle text-end placeholder-glow"></td>
+                                        <td className="align-middle text-end placeholder-glow">
+                                            <span className="placeholder col-6"></span>
+                                        </td>
                                         <td className="align-middle col-2 text-center">
                                             <div
                                                 style={{
@@ -321,11 +323,6 @@ function Store() {
                                                 <span className="placeholder col-6"></span>
                                             </h5>
                                             <p className="card-text placeholder-glow">
-                                                <span className="placeholder col-7"></span>
-                                                <span className="placeholder col-4"></span>
-                                                <span className="placeholder col-4"></span>
-                                                <span className="placeholder col-6"></span>
-                                                <span className="placeholder col-8"></span>
                                             </p>
                                         </td>
                                         <td className="align-middle col-2 text-center">
