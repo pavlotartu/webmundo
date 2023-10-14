@@ -56,79 +56,11 @@ function Home() {
   return (
     <>
       <header>
-        <div className="carousel-container mt-2">
-          <div
-            id="carouselExampleControls"
-            className="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img
-                  src="../src/assets/img/slider01.png"
-                  className="img-fluid d-block mx-auto custom-img"
-                  alt=" img01"
-                />
-              </div>
-              <div className="carousel-item">
-                <img
-                  src="../src/assets/img/slider02.png"
-                  className="img-fluid d-block mx-auto custom-img"
-                  alt=" img02"
-                />
-              </div>
-              <div className="carousel-item">
-                <img
-                  src="../src/assets/img/slider03.png"
-                  className="img-fluid d-block mx-auto custom-img"
-                  alt=" img03"
-                />
-              </div>
-              <div className="carousel-item">
-                <img
-                  src="../src/assets/img/slider04.png"
-                  className="img-fluid d-block mx-auto custom-img"
-                  alt=" img04"
-                />
-              </div>
-              <div className="carousel-item">
-                <img
-                  src="../src/assets/img/slider05.png"
-                  className="img-fluid d-block mx-auto custom-img"
-                  alt=" img05"
-                />
-              </div>
-            </div>
-            <button
-              className="carousel-control-prev custom-carousel-control"
-              type="button"
-              data-bs-target="#carouselExampleControls"
-              data-bs-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon custom-carousel-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next custom-carousel-control"
-              type="button"
-              data-bs-target="#carouselExampleControls"
-              data-bs-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon custom-carousel-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div>
+        <video src="../src/assets/img/banner.mp4" className="object-fit-contain w-100" autoPlay loop></video>
       </header>
 
       <main>
-        <div className="d-flex flex-wrap justify-content-center m-5">
+        <div className="d-flex flex-wrap justify-content-center m-3">
           <div className="tienda card text-center shadow-lg m-2"
             style={{ width: "18rem" }}
           >
