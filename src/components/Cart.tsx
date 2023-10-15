@@ -170,11 +170,11 @@ const Carrito: React.FC<CarritoProps> = ({
                     <td className="align-middle text-center" style={{
                             width: "100%",
                             height: "100%",
-                          }}>${item.price + ",00"}</td>
+                          }}>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
                     <td className="align-middle text-end" style={{
                             width: "100%",
                             height: "100%",
-                          }}>${item.price * (item.quantity || 1)},00</td>
+                          }}>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
                     <td className="align-middle text-center">
                       <button
                         className="btn border-0"
@@ -198,7 +198,7 @@ const Carrito: React.FC<CarritoProps> = ({
                   <td className="col-2">
                     <div className="d-flex justify-content-between">
                       <span>Total:</span>
-                      <span>${calculateTotal()},00</span>
+                      <span>${calculateTotal().toFixed(2)}</span>
                     </div>
                   </td>
                 </tr>

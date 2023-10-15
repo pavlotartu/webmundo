@@ -177,7 +177,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 value={formData.firstName}
                                 onChange={handleInputChange}
                                 autoComplete="given-name"
-                                required/>
+                                required />
                         </div>
                         <div className="col-md-6">
                             <Form.Label htmlFor="lastName" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Apellido</strong></Form.Label>
@@ -189,7 +189,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 value={formData.lastName}
                                 onChange={handleInputChange}
                                 autoComplete="family-name"
-                                required/>
+                                required />
                         </div>
                     </Form.Group>
 
@@ -204,7 +204,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 value={formData.address}
                                 onChange={handleInputChange}
                                 autoComplete="address-line1"
-                                required/>
+                                required />
                         </div>
                         <div className="col-md-4">
                             <Form.Label htmlFor="city"> <strong>Ciudad</strong></Form.Label>
@@ -216,7 +216,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 value={formData.city}
                                 onChange={handleInputChange}
                                 autoComplete="address-level2"
-                                required/>
+                                required />
                         </div>
                         <div className="col-md-4">
                             <Form.Label htmlFor="province" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Provincia</strong></Form.Label>
@@ -228,7 +228,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 placeholder="Provincia Obligatorio"
                                 onChange={handleInputChange}
                                 autoComplete="address-level1"
-                                required/>
+                                required />
                         </div>
                     </Form.Group>
 
@@ -243,7 +243,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 value={formData.phoneNumber}
                                 onChange={handleInputChange}
                                 autoComplete="tel"
-                                required/>
+                                required />
                         </div>
 
                         <div className="col-md-6">
@@ -278,8 +278,10 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                 <td className="text-center">{item.id}</td>
                                 <td>{item.name}</td>
                                 <td className="text-center">{item.quantity}</td>
-                                <td className="text-end">${item.price}</td>
-                                <td className="text-end">${item.price * item.quantity}</td>
+                                <td className="text-end">${item.price.toFixed(2)}</td>
+
+                                <td className="text-end">${(item.price * item.quantity).toFixed(2)}</td>
+
                             </tr>
                         ))}
                     </tbody>
@@ -289,10 +291,9 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                             <td>
                                 <strong>
                                     Total: $
-                                    {cartItems.reduce(
-                                        (total, item) => total + item.price * item.quantity,
-                                        0
-                                    )}
+                                    {cartItems
+                                        .reduce((total, item) => total + item.price * item.quantity, 0)
+                                        .toFixed(2)}
                                 </strong>
                             </td>
                         </tr>

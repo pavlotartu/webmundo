@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import Footer from '../components/Footer';
 
-
 function Home() {
 
   const [showBbsfModal, setShowBbsfModal] = useState(false);

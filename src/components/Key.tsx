@@ -8,7 +8,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export interface Article {
+export interface Article {  
     id: number;
     name: string;
     price: number;

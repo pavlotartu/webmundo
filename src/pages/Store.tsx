@@ -20,6 +20,7 @@ function Store() {
     const [rowsPerPage, setRowsPerPage] = useState(25);
     const [cartItems, setCartItems] = useState<Article[]>(() => {
         const savedCartItems = localStorage.getItem("cartItems");
+
         return savedCartItems ? JSON.parse(savedCartItems) : [];
     });
     const [showCartModal, setShowCartModal] = useState(false);
@@ -150,23 +151,31 @@ function Store() {
     };
 
     const handleAddToCart = (selectedProductId: number, quantity: number) => {
-        const selectedItem = articles.find(
-            (article) => article.id === selectedProductId
-        );
+        const selectedItem = articles.find((article) => article.id === selectedProductId);
         if (selectedItem) {
-            const existingItemIndex = cartItems.findIndex(
-                (item) => item.id === selectedProductId
-            );
+            const existingItemIndex = cartItems.findIndex((item) => item.id === selectedProductId);
             if (existingItemIndex !== -1) {
                 const updatedCartItems = [...cartItems];
                 updatedCartItems[existingItemIndex].quantity += quantity;
                 setCartItems(updatedCartItems);
+    
+                const storedData = localStorage.getItem("cantidadesArticulosCarrito");
+                const cantidadesArticulosCarrito = storedData ? JSON.parse(storedData) : {};
+    
+                cantidadesArticulosCarrito[selectedProductId] = updatedCartItems[existingItemIndex].quantity;
+                localStorage.setItem("cantidadesArticulosCarrito", JSON.stringify(cantidadesArticulosCarrito));
             } else {
                 setCartItems([...cartItems, { ...selectedItem, quantity: quantity }]);
+                
+                const storedData = localStorage.getItem("cantidadesArticulosCarrito");
+                const cantidadesArticulosCarrito = storedData ? JSON.parse(storedData) : {};
+    
+                cantidadesArticulosCarrito[selectedProductId] = quantity;
+                localStorage.setItem("cantidadesArticulosCarrito", JSON.stringify(cantidadesArticulosCarrito));
             }
         }
     };
-
+    
     const handleEmptyCart = () => {
         setCartItems([]);
     };
