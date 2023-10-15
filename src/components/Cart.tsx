@@ -58,6 +58,7 @@ const Carrito: React.FC<CarritoProps> = ({
     setCartItems([]);
   };
 
+  // Modificar la función handleIncrementQuantity para manejar el incremento
   const handleIncrementQuantity = (index: number) => {
     const updatedCartItems = [...cartItems];
     updatedCartItems[index].quantity++;
@@ -65,10 +66,22 @@ const Carrito: React.FC<CarritoProps> = ({
     updateLocalStorage(updatedCartItems);
   };
 
+  // Modificar la función handleDecrementQuantity para manejar el decremento
   const handleDecrementQuantity = (index: number) => {
     const updatedCartItems = [...cartItems];
     if (updatedCartItems[index].quantity > 1) {
       updatedCartItems[index].quantity--;
+      setCartItems(updatedCartItems);
+      updateLocalStorage(updatedCartItems);
+    }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const updatedCartItems = [...cartItems];
+    const newQuantity = parseInt(event.target.value);
+
+    if (!isNaN(newQuantity) && newQuantity >= 1) {
+      updatedCartItems[index].quantity = newQuantity;
       setCartItems(updatedCartItems);
       updateLocalStorage(updatedCartItems);
     }
@@ -121,7 +134,7 @@ const Carrito: React.FC<CarritoProps> = ({
                     <td style={{
                       position: "relative",
                       verticalAlign: "middle",
-                      width:"100px",
+                      width: "100px",
                       height: "100px"
                     }}>
                       <div style={{
@@ -136,7 +149,7 @@ const Carrito: React.FC<CarritoProps> = ({
                             width: "100%",
                             height: "100%",
                             objectFit: "cover",
-                          }}/>
+                          }} />
                       </div>
                     </td>
                     <td className="align-middle">{item.name}</td>
@@ -152,9 +165,11 @@ const Carrito: React.FC<CarritoProps> = ({
                           </button>
                           <input
                             type="text"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             className="form-control text-center"
                             value={item.quantity}
-                            readOnly
+                            onChange={(e) => handleInputChange(e, index)}
                             id={`quantity-${item.id}`}
                           />
                           <button
@@ -168,13 +183,13 @@ const Carrito: React.FC<CarritoProps> = ({
                       </div>
                     </td>
                     <td className="align-middle text-center" style={{
-                            width: "100%",
-                            height: "100%",
-                          }}>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
+                      width: "100%",
+                      height: "100%",
+                    }}>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
                     <td className="align-middle text-end" style={{
-                            width: "100%",
-                            height: "100%",
-                          }}>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
+                      width: "100%",
+                      height: "100%",
+                    }}>${(item.price * (item.quantity || 1)).toFixed(2)}</td>
                     <td className="align-middle text-center">
                       <button
                         className="btn border-0"
