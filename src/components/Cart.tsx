@@ -58,7 +58,6 @@ const Carrito: React.FC<CarritoProps> = ({
     setCartItems([]);
   };
 
-  // Modificar la función handleIncrementQuantity para manejar el incremento
   const handleIncrementQuantity = (index: number) => {
     const updatedCartItems = [...cartItems];
     updatedCartItems[index].quantity++;
@@ -66,7 +65,6 @@ const Carrito: React.FC<CarritoProps> = ({
     updateLocalStorage(updatedCartItems);
   };
 
-  // Modificar la función handleDecrementQuantity para manejar el decremento
   const handleDecrementQuantity = (index: number) => {
     const updatedCartItems = [...cartItems];
     if (updatedCartItems[index].quantity > 1) {

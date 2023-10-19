@@ -4,6 +4,7 @@ import { Modal, Form, Button, Table } from "react-bootstrap";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import emailjs from 'emailjs-com';
+import ReCAPTCHA from "react-google-recaptcha";
 
 interface SendProps {
     cartItems: Article[];
@@ -23,6 +24,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
     });
 
     const [isEmailValid, setIsEmailValid] = useState(false);
+    const [recaptchaValue, setRecaptchaValue] = useState("");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -44,12 +46,20 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
         }));
     };
 
+    const handleRecaptchaChange = (value: string | null) => {
+        setRecaptchaValue(value || "");
+    };
+
     const clearCart = () => {
         localStorage.removeItem("cartItems");
         localStorage.removeItem("cantidadesArticulosCarrito");
     };
 
     const handleSubmit = () => {
+        if (!recaptchaValue) {
+            alert("Por favor, completa la verificación ReCAPTCHA.");
+            return;
+        }
         if (
             !formData.firstName ||
             !formData.lastName ||
@@ -119,12 +129,13 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
             <td>${item.id}</td>
             <td>${item.name}</td>
             <td>${item.quantity}</td>
-            <td>$${item.price}</td>
-            <td>$${item.price * item.quantity}</td>
+            <td>$${item.price.toFixed(2)}</td>
+            <td>$${(item.price * item.quantity).toFixed(2)}</td>
         </tr>
     `).join('');
 
-        const total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        const total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+
 
         const emailParams = {
             userEmail: formData.userEmail,
@@ -164,104 +175,105 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                 <Modal.Title>Formulario de Compra</Modal.Title>
             </Modal.Header>
 
+            <Form className="mx-3">
+                <Form.Group className="row mt-3">
+                    <div className="col-md-6">
+                        <Form.Label htmlFor="firstName" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Nombre</strong> </Form.Label>
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                            placeholder="Nombre Obligatorio"
+                            value={formData.firstName}
+                            onChange={handleInputChange}
+                            autoComplete="given-name"
+                            required />
+                    </div>
+                    <div className="col-md-6">
+                        <Form.Label htmlFor="lastName" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Apellido</strong></Form.Label>
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            placeholder="Apellido Obligatorio"
+                            value={formData.lastName}
+                            onChange={handleInputChange}
+                            autoComplete="family-name"
+                            required />
+                    </div>
+                </Form.Group>
+
+                <Form.Group className="row mt-2">
+                    <div className="col-md-4">
+                        <Form.Label htmlFor="address" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Dirección</strong></Form.Label>
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                            type="text"
+                            id="address"
+                            name="address"
+                            placeholder="Dirección Obligatorio"
+                            value={formData.address}
+                            onChange={handleInputChange}
+                            autoComplete="address-line1"
+                            required />
+                    </div>
+                    <div className="col-md-4">
+                        <Form.Label htmlFor="city"> <strong>Ciudad</strong></Form.Label>
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                            type="text"
+                            id="city"
+                            name="city"
+                            placeholder="Ciudad Obligatorio"
+                            value={formData.city}
+                            onChange={handleInputChange}
+                            autoComplete="address-level2"
+                            required />
+                    </div>
+                    <div className="col-md-4">
+                        <Form.Label htmlFor="province" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Provincia</strong></Form.Label>
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                            type="text"
+                            id="province"
+                            name="province"
+                            value={formData.province}
+                            placeholder="Provincia Obligatorio"
+                            onChange={handleInputChange}
+                            autoComplete="address-level1"
+                            required />
+                    </div>
+                </Form.Group>
+
+                <Form.Group className="row mt-2">
+                    <div className="col-md-6">
+                        <Form.Label htmlFor="phoneNumber" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Teléfono de Contacto</strong></Form.Label>
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                            type="tel"
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            placeholder="Celular sin (0) sin (15)"
+                            value={formData.phoneNumber}
+                            onChange={handleInputChange}
+                            autoComplete="tel"
+                            required />
+                    </div>
+
+                    <div className="col-md-6">
+                        <Form.Label htmlFor="userEmail" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Correo Electrónico</strong> </Form.Label>
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                            type="email"
+                            id="userEmail"
+                            name="userEmail"
+                            placeholder="Email Obligatorio ejemplo@gmail.com "
+                            value={formData.userEmail}
+                            onChange={handleInputChange}
+                            autoComplete="email"
+                            required
+                        />
+                    </div>
+                </Form.Group>
+            </Form>
+
             <Modal.Body>
-                <Form>
-                    <Form.Group className="row">
-                        <div className="col-md-6">
-                            <Form.Label htmlFor="firstName" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Nombre</strong> </Form.Label>
-                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
-                                type="text"
-                                id="firstName"
-                                name="firstName"
-                                placeholder="Nombre Obligatorio"
-                                value={formData.firstName}
-                                onChange={handleInputChange}
-                                autoComplete="given-name"
-                                required />
-                        </div>
-                        <div className="col-md-6">
-                            <Form.Label htmlFor="lastName" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Apellido</strong></Form.Label>
-                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
-                                type="text"
-                                id="lastName"
-                                name="lastName"
-                                placeholder="Apellido Obligatorio"
-                                value={formData.lastName}
-                                onChange={handleInputChange}
-                                autoComplete="family-name"
-                                required />
-                        </div>
-                    </Form.Group>
-
-                    <Form.Group className="row">
-                        <div className="col-md-4">
-                            <Form.Label htmlFor="address" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Dirección</strong></Form.Label>
-                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
-                                type="text"
-                                id="address"
-                                name="address"
-                                placeholder="Dirección Obligatorio"
-                                value={formData.address}
-                                onChange={handleInputChange}
-                                autoComplete="address-line1"
-                                required />
-                        </div>
-                        <div className="col-md-4">
-                            <Form.Label htmlFor="city"> <strong>Ciudad</strong></Form.Label>
-                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
-                                type="text"
-                                id="city"
-                                name="city"
-                                placeholder="Ciudad Obligatorio"
-                                value={formData.city}
-                                onChange={handleInputChange}
-                                autoComplete="address-level2"
-                                required />
-                        </div>
-                        <div className="col-md-4">
-                            <Form.Label htmlFor="province" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Provincia</strong></Form.Label>
-                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
-                                type="text"
-                                id="province"
-                                name="province"
-                                value={formData.province}
-                                placeholder="Provincia Obligatorio"
-                                onChange={handleInputChange}
-                                autoComplete="address-level1"
-                                required />
-                        </div>
-                    </Form.Group>
-
-                    <Form.Group className="row">
-                        <div className="col-md-6">
-                            <Form.Label htmlFor="phoneNumber" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Teléfono de Contacto</strong></Form.Label>
-                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
-                                type="tel"
-                                id="phoneNumber"
-                                name="phoneNumber"
-                                placeholder="Celular sin (0) sin (15)"
-                                value={formData.phoneNumber}
-                                onChange={handleInputChange}
-                                autoComplete="tel"
-                                required />
-                        </div>
-
-                        <div className="col-md-6">
-                            <Form.Label htmlFor="userEmail" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Correo Electrónico</strong> </Form.Label>
-                            <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
-                                type="email"
-                                id="userEmail"
-                                name="userEmail"
-                                placeholder="Email Obligatorio ejemplo@gmail.com "
-                                value={formData.userEmail}
-                                onChange={handleInputChange}
-                                autoComplete="email"
-                                required
-                            />
-                        </div>
-                    </Form.Group>
-                </Form>
-
+            <div className="table-responsive">
                 <Table striped hover className="responsive-table my-4">
                     <thead>
                         <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
@@ -299,9 +311,14 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                         </tr>
                     </tfoot>
                 </Table>
+                </div>
             </Modal.Body>
 
             <Modal.Footer>
+                <ReCAPTCHA
+                    sitekey="key"
+                    onChange={handleRecaptchaChange}
+                />
                 <Button
                     style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
                     variant="primary"
@@ -314,7 +331,8 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                         !formData.province ||
                         !formData.phoneNumber ||
                         !formData.userEmail ||
-                        !isEmailValid
+                        !isEmailValid ||
+                        !recaptchaValue
                     }>
                     Descargar Pedido
                 </Button>
@@ -330,9 +348,10 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                         !formData.province ||
                         !formData.phoneNumber ||
                         !formData.userEmail ||
-                        !isEmailValid
+                        !isEmailValid ||
+                        !recaptchaValue
                     }>
-                    Enviar Pedido por Email
+                    Enviar Pedido
                 </Button>
             </Modal.Footer>
         </Modal>

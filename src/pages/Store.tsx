@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Amount from "../components/Amount";
 import Carrito from "../components/Cart";
 import Footer from '../components/Footer';
+import ScrollButton from '../components/ScrollButton';
 import { Modal, Table } from "react-bootstrap";
 
 function Store() {
@@ -119,22 +120,33 @@ function Store() {
 
     const renderPageNumbers = (): (number | string)[] => {
         const pages: (number | string)[] = [];
-        const maxPageButtons = 25;
-
-        let start = Math.max(1, currentPage - Math.floor(maxPageButtons / 2));
-        let end = Math.min(totalPages, start + maxPageButtons - 1);
-
-        if (currentPage > 1) {
-            pages.push("Anterior");
+        const maxPageButtons = 5;
+        const numButtonsToShow = Math.min(totalPages, maxPageButtons);
+    
+        if (numButtonsToShow <= 2) {
+            for (let page = 1; page <= totalPages; page++) {
+                pages.push(page);
+            }
+        } else {
+            if (currentPage > 1) {
+                pages.push("Anterior");
+            }
+    
+            const start = Math.max(1, currentPage - Math.floor((numButtonsToShow - 1) / 2));
+            const end = Math.min(totalPages, start + numButtonsToShow - 1);
+    
+            for (let page = start; page <= end; page++) {
+                pages.push(page);
+            }
+    
+            if (currentPage < totalPages) {
+                pages.push("Siguiente");
+            }
         }
-        for (let page = start; page <= end; page++) {
-            pages.push(page);
-        }
-        if (currentPage < totalPages) {
-            pages.push("Siguiente");
-        }
+    
         return pages;
     };
+    
 
     const handlePageChange = (newPage: number | string) => {
         if (typeof newPage === "number") {
@@ -150,32 +162,6 @@ function Store() {
         setRowsPerPage(newRowsPerPage);
     };
 
-    const handleAddToCart = (selectedProductId: number, quantity: number) => {
-        const selectedItem = articles.find((article) => article.id === selectedProductId);
-        if (selectedItem) {
-            const existingItemIndex = cartItems.findIndex((item) => item.id === selectedProductId);
-            if (existingItemIndex !== -1) {
-                const updatedCartItems = [...cartItems];
-                updatedCartItems[existingItemIndex].quantity += quantity;
-                setCartItems(updatedCartItems);
-    
-                const storedData = localStorage.getItem("cantidadesArticulosCarrito");
-                const cantidadesArticulosCarrito = storedData ? JSON.parse(storedData) : {};
-    
-                cantidadesArticulosCarrito[selectedProductId] = updatedCartItems[existingItemIndex].quantity;
-                localStorage.setItem("cantidadesArticulosCarrito", JSON.stringify(cantidadesArticulosCarrito));
-            } else {
-                setCartItems([...cartItems, { ...selectedItem, quantity: quantity }]);
-                
-                const storedData = localStorage.getItem("cantidadesArticulosCarrito");
-                const cantidadesArticulosCarrito = storedData ? JSON.parse(storedData) : {};
-    
-                cantidadesArticulosCarrito[selectedProductId] = quantity;
-                localStorage.setItem("cantidadesArticulosCarrito", JSON.stringify(cantidadesArticulosCarrito));
-            }
-        }
-    };
-    
     const handleEmptyCart = () => {
         setCartItems([]);
     };
@@ -209,8 +195,10 @@ function Store() {
                                         </div>
                                         <div className="card-footer">
                                             <Amount
-                                                onAddToCart={handleAddToCart}
                                                 selectedProductId={article.id}
+                                                cartItems={cartItems}
+                                                setCartItems={setCartItems}
+                                                articles={articles} 
                                             />
                                         </div>
                                     </div>
@@ -297,8 +285,10 @@ function Store() {
                                             </td>
                                             <td className="align-middle col-2 text-end">
                                                 <Amount
-                                                    onAddToCart={handleAddToCart}
                                                     selectedProductId={article.id}
+                                                    cartItems={cartItems}
+                                                    setCartItems={setCartItems}
+                                                    articles={articles} 
                                                 />
                                             </td>
                                         </tr>
@@ -376,8 +366,8 @@ function Store() {
     return (
         <>
             <Navbar />
-
             <main>
+            <ScrollButton />
                 <div className="check" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
                     <div className="d-flex align-items-center">
                         <div className="form-check form-switch d-flex flex-wrap">

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { Article } from "./Key";
 
 interface AmountProps {
-  onAddToCart: (selectedProductId: number, quantity: number) => void;
   selectedProductId: number;
+  cartItems: Article[];
+  setCartItems: (cartItems: Article[]) => void;
+  articles: Article[];
 }
 
-const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
+const Amount: React.FC<AmountProps> = ({ selectedProductId, cartItems, setCartItems, articles }) => {
   const [quantity, setQuantity] = useState<number>(1);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,9 +18,33 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
     }
   };
 
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
   const handleAddToCart = () => {
-    if (selectedProductId !== undefined) {
-      onAddToCart(selectedProductId, quantity);
+    const selectedItem = articles.find((article) => article.id === selectedProductId);
+    if (selectedItem) {
+      const existingItemIndex = cartItems.findIndex((item) => item.id === selectedProductId);
+      if (existingItemIndex !== -1) {
+        const updatedCartItems = [...cartItems];
+        updatedCartItems[existingItemIndex].quantity += quantity;
+        setCartItems(updatedCartItems);
+
+        const storedData = localStorage.getItem("cantidadesArticulosCarrito");
+        const cantidadesArticulosCarrito = storedData ? JSON.parse(storedData) : {};
+
+        cantidadesArticulosCarrito[selectedProductId] = updatedCartItems[existingItemIndex].quantity;
+        localStorage.setItem("cantidadesArticulosCarrito", JSON.stringify(cantidadesArticulosCarrito));
+      } else {
+        setCartItems([...cartItems, { ...selectedItem, quantity: quantity }]);
+        
+        const storedData = localStorage.getItem("cantidadesArticulosCarrito");
+        const cantidadesArticulosCarrito = storedData ? JSON.parse(storedData) : {};
+
+        cantidadesArticulosCarrito[selectedProductId] = quantity;
+        localStorage.setItem("cantidadesArticulosCarrito", JSON.stringify(cantidadesArticulosCarrito));
+      }
     }
   };
 
@@ -48,11 +75,10 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
         <button
           className="btn btn-outline-secondary btn-sm"
           type="button"
-          onClick={() => setQuantity(quantity + 1)}
+          onClick={incrementQuantity}
         >
           +
         </button>
-
       </div>
       <button
         className="btn btn-sm m-auto border-0"
@@ -60,9 +86,9 @@ const Amount: React.FC<AmountProps> = ({ onAddToCart, selectedProductId }) => {
         disabled={selectedProductId === undefined}
       >
         <img
-          src="../src/assets/img/icon/agregar.png"
+          src="../src/assets/img/icon/agregar.png" 
           style={{ width: '30px', height: 'auto' }}
-          alt="Tienda"
+          alt="Agregar al carrito"
           className="hover-effect"
         />
       </button>

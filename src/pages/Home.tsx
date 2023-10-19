@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import Footer from '../components/Footer';
+import ScrollButton from '../components/ScrollButton';
 
 function Home() {
 
@@ -59,6 +60,7 @@ function Home() {
       </header>
 
       <main>
+        <ScrollButton />
         <div className="d-flex flex-wrap justify-content-center m-3">
           <div className="tienda card text-center shadow-lg m-2"
             style={{ width: "18rem" }}
