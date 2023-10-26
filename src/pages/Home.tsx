@@ -55,13 +55,10 @@ function Home() {
 
   return (
     <>
-      <header>
-        <video src="../src/assets/img/banner.mp4" className="object-fit-contain w-100" autoPlay loop></video>
-      </header>
-
       <main>
         <ScrollButton />
-        <div className="d-flex flex-wrap justify-content-center m-3">
+        <video src="../src/assets/img/banner.mp4" className="object-fit-contain w-100" autoPlay loop></video>
+        <div className="d-flex flex-wrap justify-content-center mt-4">
           <div className="tienda card text-center shadow-lg m-2"
             style={{ width: "18rem" }}
           >
@@ -482,7 +479,7 @@ function Home() {
               <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>TARJETAS DE DEBITO</strong>
               </h5>
-              <img className="rounded img-thumbnail" src="./src/assets/img/news/debito.png" alt="bsf" style={{
+              <img className="rounded img-thumbnail" src="./src/assets/img/news/debito.png" alt="tard" style={{
                 width: "80%",
                 height: "50px",
                 objectFit: "unset",
@@ -490,7 +487,7 @@ function Home() {
               <h5 className="card-title mt-4" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>TARJETAS DE CREDITO</strong>
               </h5>
-              <img className="rounded img-thumbnail" src="./src/assets/img/news/credito.png" alt="bsf" style={{
+              <img className="rounded img-thumbnail" src="./src/assets/img/news/credito.png" alt="tarc" style={{
                 width: "80%",
                 height: "120px",
                 objectFit: "unset",

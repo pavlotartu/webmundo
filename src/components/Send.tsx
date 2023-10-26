@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Article } from "./Key";
 import { Modal, Form, Button, Table } from "react-bootstrap";
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 import emailjs from 'emailjs-com';
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -55,68 +53,6 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
         localStorage.removeItem("cantidadesArticulosCarrito");
     };
 
-    const handleSubmit = () => {
-        if (!recaptchaValue) {
-            alert("Por favor, completa la verificación ReCAPTCHA.");
-            return;
-        }
-        if (
-            !formData.firstName ||
-            !formData.lastName ||
-            !formData.address ||
-            !formData.city ||
-            !formData.province ||
-            !formData.phoneNumber ||
-            !formData.userEmail
-        ) {
-            alert('Por favor, complete todos los campos.');
-            return;
-        }
-
-        const doc = new jsPDF('p', 'mm', 'a4');
-
-        doc.text('Formulario de Compra', 10, 10);
-
-        doc.text(`Nombre: ${formData.firstName} ${formData.lastName}`, 10, 20);
-        doc.text(
-            `Dirección: ${formData.address}, ${formData.city}, ${formData.province}`,
-            10,
-            30
-        );
-        doc.text(`Teléfono de Contacto: ${formData.phoneNumber}`, 10, 40);
-
-        const tableData = cartItems.map((item) => [
-            item.id,
-            item.name,
-            item.quantity,
-            `$${item.price}`,
-            `$${item.price * item.quantity}`,
-        ]);
-
-        let yOffset = 70;
-        const lineHeight = 10;
-
-        autoTable(doc, {
-            body: tableData,
-            startY: yOffset,
-            theme: 'plain',
-            margin: { top: 10, right: 10, bottom: 10, left: 10 },
-        });
-
-        const total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-        doc.text(`Total: $${total}`, 10, yOffset + tableData.length * lineHeight + 10);
-
-        doc.save('pedido.pdf');
-
-        localStorage.removeItem("cartItems");
-        localStorage.removeItem("cantidadesArticulosCarrito");
-
-        window.location.reload();
-
-        clearCart();
-
-        closeModal();
-    };
 
     const handleEmailSubmit = () => {
         if (!validateEmail(formData.userEmail)) {
@@ -136,7 +72,6 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
 
         const total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
 
-
         const emailParams = {
             userEmail: formData.userEmail,
             firstName: formData.firstName,
@@ -149,7 +84,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
             total: total
         };
 
-/* credenciales */
+/* credencailes */
 
         emailjs.send(serviceID, templateID, emailParams)
             .then(() => {
@@ -157,7 +92,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                 setTimeout(() => {
                     clearCart();
                     window.location.reload();
-                }, 600);
+                }, 300);
             })
             .catch((error) => {
                 alert('Hubo un error al enviar el pedido por correo: ' + error);
@@ -179,7 +114,8 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                 <Form.Group className="row mt-3">
                     <div className="col-md-6">
                         <Form.Label htmlFor="firstName" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Nombre</strong> </Form.Label>
-                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                        <Form.Control
+                            style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
                             type="text"
                             id="firstName"
                             name="firstName"
@@ -187,11 +123,12 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                             value={formData.firstName}
                             onChange={handleInputChange}
                             autoComplete="given-name"
-                            required />
+                            required
+                        />
                     </div>
                     <div className="col-md-6">
                         <Form.Label htmlFor="lastName" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Apellido</strong></Form.Label>
-                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
                             type="text"
                             id="lastName"
                             name="lastName"
@@ -206,7 +143,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                 <Form.Group className="row mt-2">
                     <div className="col-md-4">
                         <Form.Label htmlFor="address" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Dirección</strong></Form.Label>
-                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
                             type="text"
                             id="address"
                             name="address"
@@ -218,7 +155,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                     </div>
                     <div className="col-md-4">
                         <Form.Label htmlFor="city"> <strong>Ciudad</strong></Form.Label>
-                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
                             type="text"
                             id="city"
                             name="city"
@@ -230,7 +167,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                     </div>
                     <div className="col-md-4">
                         <Form.Label htmlFor="province" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Provincia</strong></Form.Label>
-                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
                             type="text"
                             id="province"
                             name="province"
@@ -245,7 +182,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                 <Form.Group className="row mt-2">
                     <div className="col-md-6">
                         <Form.Label htmlFor="phoneNumber" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Teléfono de Contacto</strong></Form.Label>
-                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
                             type="tel"
                             id="phoneNumber"
                             name="phoneNumber"
@@ -258,7 +195,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
 
                     <div className="col-md-6">
                         <Form.Label htmlFor="userEmail" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}> <strong>Correo Electrónico</strong> </Form.Label>
-                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}
+                        <Form.Control style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
                             type="email"
                             id="userEmail"
                             name="userEmail"
@@ -273,87 +210,81 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
             </Form>
 
             <Modal.Body>
-            <div className="table-responsive">
-                <Table striped hover className="responsive-table my-4">
-                    <thead>
-                        <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
-                            <th className="text-center">Código</th>
-                            <th>Producto</th>
-                            <th className="text-center">Cantidad</th>
-                            <th className="text-end">Precio</th>
-                            <th className="text-end">Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {cartItems.map((item) => (
-                            <tr key={item.id} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
-                                <td className="text-center">{item.id}</td>
-                                <td>{item.name}</td>
-                                <td className="text-center">{item.quantity}</td>
-                                <td className="text-end">${item.price.toFixed(2)}</td>
-
-                                <td className="text-end">${(item.price * item.quantity).toFixed(2)}</td>
-
+                <div className="table-responsive">
+                    <Table striped hover className="responsive-table my-4">
+                        <thead>
+                            <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+                                <th className="text-center">Código</th>
+                                <th>Producto</th>
+                                <th className="text-center">Cantidad</th>
+                                <th className="text-end">Precio</th>
+                                <th className="text-end">Subtotal</th>
                             </tr>
-                        ))}
-                    </tbody>
-                    <tfoot>
-                        <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
-                            <td colSpan={4}></td>
-                            <td>
-                                <strong>
-                                    Total: $
-                                    {cartItems
-                                        .reduce((total, item) => total + item.price * item.quantity, 0)
-                                        .toFixed(2)}
-                                </strong>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </Table>
+                        </thead>
+                        <tbody>
+                            {cartItems.map((item) => (
+                                <tr key={item.id} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
+                                    <td className="text-center">{item.id}</td>
+                                    <td>{item.name}</td>
+                                    <td className="text-center">{item.quantity}</td>
+                                    <td className="text-end">${item.price.toFixed(2)}</td>
+
+                                    <td className="text-end">${(item.price * item.quantity).toFixed(2)}</td>
+
+                                </tr>
+                            ))}
+                        </tbody>
+                        <tfoot>
+                            <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+                                <td colSpan={4}></td>
+                                <td>
+                                    <strong>
+                                        Total: $
+                                        {cartItems
+                                            .reduce((total, item) => total + item.price * item.quantity, 0)
+                                            .toFixed(2)}
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </Table>
                 </div>
             </Modal.Body>
 
             <Modal.Footer>
-                <ReCAPTCHA
-                    sitekey="key"
-                    onChange={handleRecaptchaChange}
-                />
-                <Button
-                    style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
-                    variant="primary"
-                    onClick={handleSubmit}
-                    disabled={
-                        !formData.firstName ||
-                        !formData.lastName ||
-                        !formData.address ||
-                        !formData.city ||
-                        !formData.province ||
-                        !formData.phoneNumber ||
-                        !formData.userEmail ||
-                        !isEmailValid ||
-                        !recaptchaValue
-                    }>
-                    Descargar Pedido
-                </Button>
-                <Button
-                    style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}
-                    variant="success"
-                    onClick={handleEmailSubmit}
-                    disabled={
-                        !formData.firstName ||
-                        !formData.lastName ||
-                        !formData.address ||
-                        !formData.city ||
-                        !formData.province ||
-                        !formData.phoneNumber ||
-                        !formData.userEmail ||
-                        !isEmailValid ||
-                        !recaptchaValue
-                    }>
-                    Enviar Pedido
-                </Button>
+                <div className="d-flex flex-column align-items-end">
+                    <ReCAPTCHA
+                        className="m-1"
+                        sitekey="/* credencailes */"
+                        onChange={handleRecaptchaChange}
+                    />
+
+                    <Button
+                        className="m-1"
+                        style={{
+                            fontFamily: 'Open Sans, sans-serif',
+                            fontWeight: 400,
+                            fontStyle: 'italic',
+                        }}
+                        variant="success"
+                        onClick={handleEmailSubmit}
+                        disabled={
+                            !formData.firstName ||
+                            !formData.lastName ||
+                            !formData.address ||
+                            !formData.city ||
+                            !formData.province ||
+                            !formData.phoneNumber ||
+                            !formData.userEmail ||
+                            !isEmailValid ||
+                            !recaptchaValue
+                        }
+                    >
+                        Enviar Pedido
+                    </Button>
+                </div>
             </Modal.Footer>
+
         </Modal>
     );
 };

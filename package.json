@@ -10,9 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/firebase": "^3.2.1",
     "bootstrap": "^5.3.2",
     "emailjs-com": "^3.2.0",
-    "firebase": "^10.4.0",
+    "firebase": "^10.5.0",
     "googleapis": "^126.0.1",
     "html-to-xlsx": "^2.2.4",
     "jspdf": "^2.5.1",

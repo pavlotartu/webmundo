@@ -1,14 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-/* credenciales */
+/* credencailes */
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export interface Article {  
+export interface Article {
     id: number;
     name: string;
     price: number;

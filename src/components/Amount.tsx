@@ -38,7 +38,7 @@ const Amount: React.FC<AmountProps> = ({ selectedProductId, cartItems, setCartIt
         localStorage.setItem("cantidadesArticulosCarrito", JSON.stringify(cantidadesArticulosCarrito));
       } else {
         setCartItems([...cartItems, { ...selectedItem, quantity: quantity }]);
-        
+
         const storedData = localStorage.getItem("cantidadesArticulosCarrito");
         const cantidadesArticulosCarrito = storedData ? JSON.parse(storedData) : {};
 
@@ -86,7 +86,7 @@ const Amount: React.FC<AmountProps> = ({ selectedProductId, cartItems, setCartIt
         disabled={selectedProductId === undefined}
       >
         <img
-          src="../src/assets/img/icon/agregar.png" 
+          src="../src/assets/img/icon/agregar.png"
           style={{ width: '30px', height: 'auto' }}
           alt="Agregar al carrito"
           className="hover-effect"

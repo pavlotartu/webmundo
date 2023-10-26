@@ -27,7 +27,7 @@ const ScrollButton = () => {
 
     return (
         <div
-            className= {`scroll-button ${isVisible ? 'visible' : ''}`}
+            className={`scroll-button ${isVisible ? 'visible' : ''}`}
             style={{
                 position: 'fixed',
                 left: '50vw',

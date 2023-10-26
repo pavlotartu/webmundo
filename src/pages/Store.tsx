@@ -122,44 +122,52 @@ function Store() {
         const pages: (number | string)[] = [];
         const maxPageButtons = 5;
         const numButtonsToShow = Math.min(totalPages, maxPageButtons);
-    
+
         if (numButtonsToShow <= 2) {
             for (let page = 1; page <= totalPages; page++) {
                 pages.push(page);
             }
         } else {
             if (currentPage > 1) {
-                pages.push("Anterior");
+                pages.push("<");
             }
-    
+
             const start = Math.max(1, currentPage - Math.floor((numButtonsToShow - 1) / 2));
             const end = Math.min(totalPages, start + numButtonsToShow - 1);
-    
+
             for (let page = start; page <= end; page++) {
                 pages.push(page);
             }
-    
+
             if (currentPage < totalPages) {
-                pages.push("Siguiente");
+                pages.push(">");
             }
         }
-    
+
         return pages;
     };
-    
+
 
     const handlePageChange = (newPage: number | string) => {
         if (typeof newPage === "number") {
             setCurrentPage(newPage);
-        } else if (newPage === "Anterior" && currentPage > 1) {
+        } else if (newPage === "<" && currentPage > 1) {
             setCurrentPage(currentPage - 1);
-        } else if (newPage === "Siguiente" && currentPage < totalPages) {
+        } else if (newPage === ">" && currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
     };
 
     const handleRowsPerPageChange = (newRowsPerPage: number) => {
         setRowsPerPage(newRowsPerPage);
+
+        const newTotalPages = Math.ceil(filteredArticles.length / newRowsPerPage);
+
+        if (currentPage > newTotalPages) {
+            setCurrentPage(newTotalPages);
+        } else {
+            setCurrentPage(1);
+        }
     };
 
     const handleEmptyCart = () => {
@@ -174,7 +182,7 @@ function Store() {
                         {articles.length > 0 ? (
                             currentRows.map((article) => (
                                 <div key={article.id} className="col-12 col-sm-6 col-md-4 mb-5">
-                                    <div className="card">
+                                    <div className="card ">
                                         <img
                                             src={article.image}
                                             className="card-img-top"
@@ -185,8 +193,10 @@ function Store() {
                                             alt={article.name ?? "Nombre no disponible"}
                                             onClick={() => openModal(article.image, article.name)}
                                         />
-                                        <div className="card-body">
-                                            <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+                                        <div className="card-body" style={{
+                                            minHeight: "25vh",
+                                        }}>
+                                            <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, }}>
                                                 {article.name}
                                             </h5>
                                             <p className="card-text" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
@@ -198,7 +208,7 @@ function Store() {
                                                 selectedProductId={article.id}
                                                 cartItems={cartItems}
                                                 setCartItems={setCartItems}
-                                                articles={articles} 
+                                                articles={articles}
                                             />
                                         </div>
                                     </div>
@@ -223,13 +233,35 @@ function Store() {
                             </div>
                         )}
                     </div>
+                    <nav>
+                        <ul className="pagination pagination-sm justify-content-end">
+                            {renderPageNumbers().map((page, index) => (
+                                <li
+                                    key={index}
+                                    className={`page-item ${page === "Anterior" || page === "Siguiente"
+                                        ? ""
+                                        : currentPage === page
+                                            ? "active"
+                                            : ""
+                                        }`}>
+                                    <a
+                                        className="page-link"
+                                        href="#"
+                                        onClick={() => handlePageChange(page)}
+                                    >
+                                        {page}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
                 </div>
             );
 
         } else {
             return (
                 <div style={{ marginLeft: "3vw", marginRight: "3vw" }}>
-                    <div className="table-responsive">
+                    <div className="table-responsive shadow mb-1">
                         <Table striped hover className="tabla-pc table w-100">
                             <thead className="table-dark">
                                 <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
@@ -288,7 +320,7 @@ function Store() {
                                                     selectedProductId={article.id}
                                                     cartItems={cartItems}
                                                     setCartItems={setCartItems}
-                                                    articles={articles} 
+                                                    articles={articles}
                                                 />
                                             </td>
                                         </tr>
@@ -367,7 +399,7 @@ function Store() {
         <>
             <Navbar />
             <main>
-            <ScrollButton />
+                <ScrollButton />
                 <div className="check" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
                     <div className="d-flex align-items-center">
                         <div className="form-check form-switch d-flex flex-wrap">
@@ -394,7 +426,6 @@ function Store() {
                                 ))}
                         </div>
                     </div>
-
 
                     <nav className="navbar" style={{ marginRight: "2vw" }}>
                         <div className="container-fluid">

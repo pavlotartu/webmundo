@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 
+
 function Contacto() {
   const [isDesktop, setIsDesktop] = useState(false);
 
@@ -150,7 +151,9 @@ function Contacto() {
 
         </div>
       </main>
+
       <Footer />
+      
     </>
   );
 }

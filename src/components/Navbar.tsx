@@ -12,7 +12,7 @@ function CustomNavbar() {
     return (
 
         <header>
-            <Navbar bg="white" expand="lg" sticky="top">
+         <Navbar className="custom-navbar fixed-top position-top" expand="lg">
                 <Container>
                     <Navbar.Brand as={Link} to="/">
                         <img className='logo_menu' src="./src/assets/img/icon/logomundo.png" alt="Logo"/>
