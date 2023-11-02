@@ -57,7 +57,7 @@ function Home() {
     <>
       <main>
         <ScrollButton />
-        <video src="../src/assets/img/banner.mp4" className="object-fit-contain w-100" autoPlay loop></video>
+        <video src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fbanner.webm?alt=media&token=f3ac85d1-c3f9-4d3c-a468-aade4636654d&_gl=1*1v2oju2*_ga*MTAxMzIzNzgwMS4xNjk2MDI3OTUw*_ga_CW55HF8NVT*MTY5ODk0MzU4Ny45NS4x.1.0" className="object-fit-contain w-100" autoPlay loop></video>
         <div className="d-flex flex-wrap justify-content-center mt-4">
           <div className="tienda card text-center shadow-lg m-2"
             style={{ width: "18rem" }}
@@ -123,12 +123,12 @@ function Home() {
           </div>
         </div>
 
-        <h1 className="text-center m-5" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+        <h1 className="text-center my-5" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
           <strong>🤩 NOVEDADES 🤩</strong>
         </h1>
 
-        <div className="row row-col-1 row-col-md-3  m-2">
-          <div className="col m-2 ">
+        <div className="row d-flex justify-content-center m-0">
+          <div className="col-12 col-md-6 col-lg-4 my-2">
             <div className="card h-100">
               <div
                 id="carouselCard1"
@@ -138,7 +138,7 @@ function Home() {
                 <div className="carousel-inner">
                   <div className="carousel-item active">
                     <img
-                      src="./src/assets/img/news/01banner01.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F01banner01.png?alt=media&token=d53398a4-4acf-4f8e-8260-7a06bd1fc62a"
                       className="d-block w-100"
                       alt="Imagen 1-1"
                       style={{
@@ -150,7 +150,7 @@ function Home() {
                   </div>
                   <div className="carousel-item">
                     <img
-                      src="./src/assets/img/news/01banner02.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F01banner02.png?alt=media&token=393feb82-3227-43ef-a247-4f3406f53578"
                       className="d-block w-100"
                       alt="Imagen 1-2"
                       style={{
@@ -162,7 +162,7 @@ function Home() {
                   </div>
                   <div className="carousel-item">
                     <img
-                      src="./src/assets/img/news/01banner03.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F01banner03.png?alt=media&token=a7f68b31-65aa-4834-873c-e526792ddacb"
                       className="d-block w-100"
                       alt="Imagen 1-3"
                       style={{
@@ -209,7 +209,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="col m-2">
+          <div className="col-12 col-md-6 col-lg-4 my-2">
             <div className="card h-100 ">
               <div
                 id="carouselCard2"
@@ -219,7 +219,7 @@ function Home() {
                 <div className="carousel-inner">
                   <div className="carousel-item active">
                     <img
-                      src="./src/assets/img/news/02banner01.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F02banner01.png?alt=media&token=d8836f01-c9ee-4f7d-9b3e-e2f1e8c1c94f"
                       className="d-block w-100"
                       alt="Imagen 2-1"
                       style={{
@@ -231,7 +231,7 @@ function Home() {
                   </div>
                   <div className="carousel-item">
                     <img
-                      src="./src/assets/img/news/02banner02.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F02banner02.png?alt=media&token=35249e75-6d16-4b52-8001-84a3d506e343"
                       className="d-block w-100"
                       alt="Imagen 2-2"
                       style={{
@@ -243,7 +243,7 @@ function Home() {
                   </div>
                   <div className="carousel-item">
                     <img
-                      src="./src/assets/img/news/02banner03.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F02banner03.png?alt=media&token=985e97da-37df-4427-8923-b0ed2784dbfb"
                       className="d-block w-100"
                       alt="Imagen 2-3"
                       style={{
@@ -290,7 +290,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="col m-2">
+          <div className="col-12 col-md-6 col-lg-4 my-2">
             <div className="card h-100 ">
               <div
                 id="carouselCard3"
@@ -300,7 +300,7 @@ function Home() {
                 <div className="carousel-inner">
                   <div className="carousel-item active">
                     <img
-                      src="./src/assets/img/news/03banner01.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F03banner01.png?alt=media&token=b79678f9-d3f2-43cc-b5eb-b4c5970c2ab0"
                       className="d-block w-100"
                       alt="Imagen 3-1"
                       style={{
@@ -312,7 +312,7 @@ function Home() {
                   </div>
                   <div className="carousel-item">
                     <img
-                      src="./src/assets/img/news/03banner02.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F03banner02.png?alt=media&token=3acaa395-2cef-4bec-b158-226c95182e70"
                       className="d-block w-100"
                       alt="Imagen 3-2"
                       style={{
@@ -324,7 +324,7 @@ function Home() {
                   </div>
                   <div className="carousel-item">
                     <img
-                      src="./src/assets/img/news/03banner03.png"
+                      src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F03banner03.png?alt=media&token=71c92927-86d6-4af8-8997-899bfc03a824"
                       className="d-block w-100"
                       alt="Imagen 3-3"
                       style={{
@@ -385,16 +385,16 @@ function Home() {
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img src="./src/assets/img/news/01compra.png" className="d-block img-fluid" alt="01compra" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F01compra.png?alt=media&token=72639461-f35d-4233-91a3-f36485701c7b" className="d-block img-fluid" alt="01compra" />
             </div>
             <div className="carousel-item">
-              <img src="./src/assets/img/news/02compra.png" className="d-block img-fluid" alt="02compra" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F02compra.png?alt=media&token=6ad7f913-d3b1-4578-8c4d-991fabcf2edd" className="d-block img-fluid" alt="02compra" />
             </div>
             <div className="carousel-item">
-              <img src="./src/assets/img/news/03compra.png" className="d-block img-fluid" alt="03compra" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F03compra.png?alt=media&token=5f508714-69e6-43f7-b056-651d1ac63d76" className="d-block img-fluid" alt="03compra" />
             </div>
             <div className="carousel-item">
-              <img src="./src/assets/img/news/04compra.png" className="d-block img-fluid" alt="04compra" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2F04compra.png?alt=media&token=20375965-2d5d-4970-a8d8-88f9cc3e4941" className="d-block img-fluid" alt="04compra" />
             </div>
           </div>
           <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -422,7 +422,7 @@ function Home() {
               <p className="card-text" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 Reintegro de  30% OFF
               </p>
-              <img className="rounded img-thumbnail" src="./src/assets/img/news/bbsf.png" alt="bbsf" style={{
+              <img className="rounded img-thumbnail" src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fbbsf.png?alt=media&token=48be1da2-785b-43cc-a36f-e960ceb17654" alt="bbsf" style={{
                 width: "60%",
                 height: "200px",
                 objectFit: "unset",
@@ -439,7 +439,7 @@ function Home() {
               </p>
               <img
                 className="rounded img-thumbnail"
-                src="./src/assets/img/news/qrmp.png"
+                src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fqrmp.png?alt=media&token=a8436523-2800-47d2-9f36-e6ab68c665b2"
                 alt="qrmp"
                 style={{
                   width: "60%",
@@ -452,7 +452,7 @@ function Home() {
           </div>
           <div className="pagos card text-center shadow-lg m-2" style={{ width: "18rem" }}>
             <div className="card-body">
-              <img className="rounded img-thumbnail" src="./src/assets/img/news/bsf.png" alt="bsf" style={{
+              <img className="rounded img-thumbnail" src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fbsf.png?alt=media&token=c69d4144-53f6-4c07-b21e-1183ba7a752f" alt="bsf" style={{
                 width: "70%",
                 height: "50px",
                 objectFit: "unset",
@@ -460,7 +460,7 @@ function Home() {
               <p className="card-text mb-5 mt-3" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>Alias:</strong> mundoaventura.sf
               </p>
-              <img className="rounded img-thumbnail" src="./src/assets/img/news/bna.png" alt="bna" style={{
+              <img className="rounded img-thumbnail" src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fbna.png?alt=media&token=03092a4d-2159-4dce-8eeb-ec6af7edac92" alt="bna" style={{
                 width: "70%",
                 height: "50px",
                 objectFit: "unset",
@@ -479,7 +479,7 @@ function Home() {
               <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>TARJETAS DE DEBITO</strong>
               </h5>
-              <img className="rounded img-thumbnail" src="./src/assets/img/news/debito.png" alt="tard" style={{
+              <img className="rounded img-thumbnail" src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fdebito.png?alt=media&token=af8e8d28-7724-4999-9558-aa60b9eafb87" alt="tard" style={{
                 width: "80%",
                 height: "50px",
                 objectFit: "unset",
@@ -487,7 +487,7 @@ function Home() {
               <h5 className="card-title mt-4" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>TARJETAS DE CREDITO</strong>
               </h5>
-              <img className="rounded img-thumbnail" src="./src/assets/img/news/credito.png" alt="tarc" style={{
+              <img className="rounded img-thumbnail" src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fcredito.png?alt=media&token=a4ed00fd-7034-44d8-b8b9-9b7a0d79c1a9" alt="tarc" style={{
                 width: "80%",
                 height: "120px",
                 objectFit: "unset",
@@ -503,7 +503,7 @@ function Home() {
           <Modal.Body style={{ textAlign: 'center' }}>
             <img
               className="rounded img-thumbnail"
-              src="./src/assets/img/news/bbsf.png"
+              src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fbbsf.png?alt=media&token=48be1da2-785b-43cc-a36f-e960ceb17654"
               alt="bsf"
               style={{ maxWidth: '100%', maxHeight: '70vh', objectFit: 'contain' }}
             />
@@ -517,7 +517,7 @@ function Home() {
           <Modal.Body style={{ textAlign: 'center' }}>
             <img
               className="rounded img-thumbnail"
-              src="./src/assets/img/news/qrmp.png"
+              src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fqrmp.png?alt=media&token=a8436523-2800-47d2-9f36-e6ab68c665b2"
               alt="qrmp"
               style={{ maxWidth: '100%', maxHeight: '70vh', objectFit: 'contain' }}
             />

@@ -118,8 +118,8 @@ const Carrito: React.FC<CarritoProps> = ({
                 <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                   <th className="text-center">Código</th>
                   <th className="text-center">Imagen</th>
-                  <th className="col-md-8">Producto</th>
-                  <th className="col-md-2 text-center">Cantidad</th>
+                  <th className="producto col-md-8">Producto</th>
+                  <th className="cantidad col-md-2 text-center">Cantidad</th>
                   <th className="text-center">Precio</th>
                   <th className=" text-center">Total</th>
                   <th className="text-center">Acciones</th>
@@ -195,7 +195,7 @@ const Carrito: React.FC<CarritoProps> = ({
                         style={{ fontSize: '20px' }}
                       >
                         <i className="bi bi-trash"></i> <img
-                          src="../src/assets/img/icon/botonx.png"
+                          src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Fbotonx.png?alt=media&token=2647e2dd-dd07-4b0a-a18a-64abb2963d98"
                           style={{ width: '35px', height: 'auto' }}
                           alt="Eliminar"
                           className="hover-effect"
@@ -205,13 +205,12 @@ const Carrito: React.FC<CarritoProps> = ({
                   </tr>
                 ))}
               </tbody>
-              <tfoot>
+              <tfoot >
                 <tr>
-                  <td colSpan={6}></td>
-                  <td className="col-2">
+                  <td colSpan={5}></td>
+                  <td colSpan={2} className="col-2" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                     <div className="d-flex justify-content-between">
-                      <span>Total:</span>
-                      <span>${calculateTotal().toFixed(2)}</span>
+                      <span><strong>Total: ${calculateTotal().toFixed(2)}</strong></span>
                     </div>
                   </td>
                 </tr>
@@ -220,9 +219,12 @@ const Carrito: React.FC<CarritoProps> = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <button className="btn btn-danger text-white ms-auto" onClick={handleEmptyCart} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
-            Vaciar Carrito
-          </button>
+          {cartItems.length > 0 && (
+            <button className="btn btn-danger text-white ms-auto" onClick={handleEmptyCart} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
+              Vaciar Carrito
+            </button>
+          )}
+
           {cartItems.length > 0 && (
             <Button variant="primary" onClick={handleCloseCartModal} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
               Realizar Compra

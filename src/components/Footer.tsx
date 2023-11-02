@@ -9,7 +9,7 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer">
                             <img
-                                src="../src/assets/img/icon/whatsapp.png"
+                                src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Fwhatsapp.png?alt=media&token=1a84b750-a07c-47e3-83a0-88d4061f61a1"
                                 alt="Icono 1"
                                 className="hover-effect img-fluid m-2"
                                 style={{ width: "30px", height: "auto" }} />
@@ -19,7 +19,7 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer">
                             <img
-                                src="../src/assets/img/icon/instagram.png"
+                                src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Finstagram.png?alt=media&token=38e1be86-3d4c-4763-a246-b2c8a4686394"
                                 alt="Icono 1"
                                 className="hover-effect img-fluid m-2"
                                 style={{ width: "30px", height: "auto" }} />
@@ -29,14 +29,14 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer">
                             <img
-                                src="../src/assets/img/icon/facebook.png"
+                                src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Ffacebook.png?alt=media&token=9c533aa3-62d2-43bc-bd01-fea2f2b20a02"
                                 alt="Icono 1"
                                 className="hover-effect img-fluid m-2"
                                 style={{ width: "30px", height: "auto" }} />
                         </a>
                         <a href="mailto:cotillonmundoaventura@gmail.com">
                             <img
-                                src="../src/assets/img/icon/gmail.png"
+                                src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Fgmail.png?alt=media&token=0a995597-1674-4117-9bab-475a5a535eea"
                                 alt="Icono 1"
                                 className="hover-effect img-fluid m-2"
                                 style={{ width: "30px", height: "auto" }} />

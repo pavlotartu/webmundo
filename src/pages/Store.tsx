@@ -217,7 +217,7 @@ function Store() {
                         ) : (
                             <div className="col-6 col-sm-6 col-md-4 mb-4">
                                 <div className="card" aria-hidden="true">
-                                    <img src="./src/assets/img/news/imgris.png" className="card-img-top" alt="imgris" />
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fimgris.png?alt=media&token=ab15dae2-d790-4467-af98-836af56a9883" className="card-img-top" alt="imgris" />
                                     <div className="card-body">
                                         <h5 className="card-title placeholder-glow">
                                             <span className="placeholder col-6"></span>
@@ -338,7 +338,7 @@ function Store() {
                                                     textAlign: "center",
                                                 }}>
                                                 <img
-                                                    src="./src/assets/img/news/imgris.png"
+                                                    src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fimgris.png?alt=media&token=ab15dae2-d790-4467-af98-836af56a9883"
                                                     className="img-fluid image-hover border rounded"
                                                     style={{
                                                         width: "100px",
@@ -442,7 +442,7 @@ function Store() {
                                         style={{ height: "7vh", minWidth: "22vw", fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }} />
 
                                     <button className="btn" type="submit">
-                                        <img src="../src/assets/img/icon/lupa.png" style={{ width: '35px', height: 'auto' }} className="hover-effect"></img>
+                                        <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Flupa.png?alt=media&token=8be363ff-d2c3-4856-9c00-8c722dec1f18" style={{ width: '35px', height: 'auto' }} className="hover-effect"></img>
                                     </button>
                                 </div>
                             </form>
@@ -450,14 +450,14 @@ function Store() {
                     </nav>
                 </div>
 
-                <div className="d-flex justify-content-end btn-lg" style={{ marginRight: "1vw", fontFamily: 'Open Sans, sans-serif', fontWeight: 300 }}>
+                <div className="d-flex justify-content-end btn-lg mt-2 mb-2" style={{ marginRight: "1vw", fontFamily: 'Open Sans, sans-serif', fontWeight: 300 }}>
                     <button
-                        className="btn  m-2 border-0"
+                        className="btn border-0 p-1"
                         onClick={() => setShowCartModal(true)}
                         style={{ fontSize: '20px', fontWeight: 'bold' }}
                     >
                         {cartTotal > 0 && <span className="small">Total: ${cartTotal.toFixed(2)}</span>
-                        } <img src="../src/assets/img/icon/carro.png" style={{ width: '55px', height: '46px' }} className="hover-effect"></img>
+                        } <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Fcarro.png?alt=media&token=37ee4dae-aead-442c-83a3-7f18b6545973" style={{ width: '55px', height: '46px' }} className="hover-effect"></img>
                         <span className="translate-middle badge rounded-pill bg-danger" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300 }}>
                             {cartItems.length}
                         </span>
@@ -477,7 +477,7 @@ function Store() {
                     style={{ marginLeft: "3vw", marginRight: "3vw" }}>
                     <div className="d-flex  align-items-center mb-3">
                         <div className="d-flex">
-                            <label htmlFor="rowsPerPageSelect"><img src="../src/assets/img/icon/fila.png" style={{ width: '35px', height: 'auto' }}></img></label>
+                            <label htmlFor="rowsPerPageSelect"><img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Ffila.png?alt=media&token=40ad81d0-f0fe-4390-90b6-794ff9a9cb42" style={{ width: '35px', height: 'auto' }}></img></label>
                             <select
                                 className="form-select form-select-sm"
                                 id="rowsPerPageSelect"

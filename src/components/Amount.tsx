@@ -86,8 +86,8 @@ const Amount: React.FC<AmountProps> = ({ selectedProductId, cartItems, setCartIt
         disabled={selectedProductId === undefined}
       >
         <img
-          src="../src/assets/img/icon/agregar.png"
-          style={{ width: '30px', height: 'auto' }}
+          src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Fargegar.png?alt=media&token=47536e23-a994-47fc-810d-d87b9087c6bc"
+          style={{ width: '35px', height: 'auto' }}
           alt="Agregar al carrito"
           className="hover-effect"
         />

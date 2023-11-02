@@ -5,12 +5,11 @@
 }
 
 header {
-  margin-bottom: 13.5vh;
+  margin-bottom: 12vh;
 }
 
 main {
   min-height: calc(100vh - 100px);
-
   background-image: url('./assets/img/6754.png');
   background-size: 100vw 80vh;
   background-repeat: repeat;
@@ -72,10 +71,19 @@ main {
 }
 
 .hover-effect:active {
-  transform: scale(0.9);
+  transform: scale(1);
 }
 
-@media only screen and (min-width: 320px) and (max-width:990px) {
+@media only screen and (min-width: 991px) and (max-width:1250px) {
+  .check {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+  }
+}
+
+@media only screen and (min-width: 700px) and (max-width:990px) {
 
   .logo_menu {
     width: 220px;
@@ -93,4 +101,38 @@ main {
     flex-wrap: wrap;
   }
 
+  .producto {
+    min-width: 35vw;
+  }
+
+  .cantidad {
+    min-width: 15vw;
+  }
+
+}
+
+@media only screen and (min-width: 320px) and (max-width:699px) {
+  
+  header {
+    margin-bottom: 15vh;
+  }
+
+  .logo_menu {
+    width: 220px;
+  }
+
+  .check {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+  }
+
+  .producto {
+    min-width: 35vw;
+  }
+
+  .cantidad {
+    min-width: 26vw;
+  }
 }

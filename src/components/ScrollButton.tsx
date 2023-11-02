@@ -30,7 +30,7 @@ const ScrollButton = () => {
             className={`scroll-button ${isVisible ? 'visible' : ''}`}
             style={{
                 position: 'fixed',
-                left: '50vw',
+                left: '48vw',
                 bottom: '5px',
                 zIndex: 999,
             }}
@@ -40,7 +40,7 @@ const ScrollButton = () => {
                 onClick={scrollToTop}
             >
                 <img
-                    src="../src/assets/img/icon/arriba.png"
+                    src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Farriba.png?alt=media&token=0fc36afc-00f7-4092-835a-c6fe9d52a8c9"
                     style={{
                         width: '35px',
                         height: 'auto',
