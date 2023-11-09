@@ -84,7 +84,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
             total: total
         };
 
-/* credencailes */
+/* credenciales */
 
         emailjs.send(serviceID, templateID, emailParams)
             .then(() => {
@@ -211,11 +211,11 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
 
             <Modal.Body>
                 <div className="table-responsive">
-                    <Table striped hover className="responsive-table my-4">
+                    <Table striped hover className=" my-4">
                         <thead>
                             <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                                 <th className="text-center">Código</th>
-                                <th className="producto">Producto</th>
+                                <th className="productosend">Producto</th>
                                 <th className="text-center">Cantidad</th>
                                 <th className="text-end">Precio</th>
                                 <th className="text-end">Subtotal</th>
@@ -229,14 +229,13 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                     <td className="text-center">{item.quantity}</td>
                                     <td className="text-end">${item.price.toFixed(2)}</td>
                                     <td className="text-end">${(item.price * item.quantity).toFixed(2)}</td>
-
                                 </tr>
                             ))}
                         </tbody>
                         <tfoot>
                             <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
-                                <td colSpan={4}></td>
-                                <td>
+                                <td colSpan={3}></td>
+                                <td colSpan={2}>
                                     <strong>
                                         Total: $
                                         {cartItems
@@ -254,7 +253,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                 <div className="d-flex flex-column align-items-end">
                     <ReCAPTCHA
                         className="m-1"
-                        sitekey="/* credencailes */"
+                        sitekey="/* credenciales */"
                         onChange={handleRecaptchaChange}
                     />
 

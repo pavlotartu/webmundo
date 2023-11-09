@@ -6,6 +6,7 @@ import Carrito from "../components/Cart";
 import Footer from '../components/Footer';
 import ScrollButton from '../components/ScrollButton';
 import { Modal, Table } from "react-bootstrap";
+import Whatsapp from "../components/Whatsapp"
 
 function Store() {
     const [articles, setArticles] = useState<Article[]>([]);
@@ -181,8 +182,8 @@ function Store() {
                     <div className="row">
                         {articles.length > 0 ? (
                             currentRows.map((article) => (
-                                <div key={article.id} className="col-12 col-sm-6 col-md-4 mb-5">
-                                    <div className="card ">
+                                <div key={article.id} className="col-6 col-sm-6 col-md-4 mb-5">
+                                    <div className="card">
                                         <img
                                             src={article.image}
                                             className="card-img-top"
@@ -193,12 +194,10 @@ function Store() {
                                             alt={article.name ?? "Nombre no disponible"}
                                             onClick={() => openModal(article.image, article.name)}
                                         />
-                                        <div className="card-body" style={{
-                                            minHeight: "25vh",
-                                        }}>
-                                            <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, }}>
+                                        <div className="card-body">
+                                            <h6 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, }}>
                                                 {article.name}
-                                            </h5>
+                                            </h6>
                                             <p className="card-text" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
                                                 <strong>Precio:</strong> ${article.price.toFixed(2)}
                                             </p>
@@ -219,9 +218,9 @@ function Store() {
                                 <div className="card" aria-hidden="true">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fimgris.png?alt=media&token=ab15dae2-d790-4467-af98-836af56a9883" className="card-img-top" alt="imgris" />
                                     <div className="card-body">
-                                        <h5 className="card-title placeholder-glow">
+                                        <h6 className="placeholder-glow">
                                             <span className="placeholder col-6"></span>
-                                        </h5>
+                                        </h6>
                                         <p className="card-text placeholder-glow">
                                             <span className="placeholder col-6"></span>
                                             <span className="placeholder col-sm-6"></span>
@@ -291,12 +290,12 @@ function Store() {
                                     currentRows.map((article) => (
                                         <tr key={article.id} style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
                                             <td className="align-middle text-center">{article.id}</td>
-                                            <td className="align-middle text-center">
+                                            <td className="align-middle text-center p-1">
                                                 <div
                                                     style={{
                                                         position: "relative",
-                                                        width: "100px",
-                                                        height: "100px",
+                                                        width: "80px",
+                                                        height: "80px",
                                                         textAlign: "center",
                                                     }}>
                                                     <img
@@ -304,8 +303,8 @@ function Store() {
                                                         alt={article.name ?? "Nombre no disponible"}
                                                         className="img-fluid image-hover border rounded img-thumbnail"
                                                         style={{
-                                                            width: "100px",
-                                                            height: "100px",
+                                                            width: "80px",
+                                                            height: "80px",
                                                             objectFit: "cover",
                                                         }}
                                                         onClick={() => openModal(article.image, article.name)} />
@@ -334,15 +333,15 @@ function Store() {
                                             <div
                                                 style={{
                                                     position: "relative",
-                                                    height: "100px",
+                                                    height: "80px",
                                                     textAlign: "center",
                                                 }}>
                                                 <img
                                                     src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fimgris.png?alt=media&token=ab15dae2-d790-4467-af98-836af56a9883"
                                                     className="img-fluid image-hover border rounded"
                                                     style={{
-                                                        width: "100px",
-                                                        height: "100px",
+                                                        width: "70px",
+                                                        height: "70px",
                                                         objectFit: "cover",
                                                     }}
                                                     alt="imgris"
@@ -399,14 +398,13 @@ function Store() {
         <>
             <Navbar />
             <main>
-                <ScrollButton />
-                <div className="check" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
+                <div className="check mx-3" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
                     <div className="d-flex align-items-center">
-                        <div className="form-check form-switch d-flex flex-wrap">
+                        <div className="d-flex flex-wrap justify-content-center px-4">
                             {categories
                                 .sort()
                                 .map((category, index) => (
-                                    <div key={category} className="d-flex align-items-center">
+                                    <div key={category} className="">
                                         <label
                                             className={`btn ${selectedCategories.includes(category) ? "btn-info active" : "btn-primary"
                                                 } mx-1`}
@@ -427,7 +425,7 @@ function Store() {
                         </div>
                     </div>
 
-                    <nav className="navbar" style={{ marginRight: "2vw" }}>
+                    <nav className="navbar">
                         <div className="container-fluid">
                             <form className="ms-auto" role="search">
                                 <div className="input-group">
@@ -439,9 +437,9 @@ function Store() {
                                         id="search-input"
                                         value={searchText}
                                         onChange={handleSearchChange}
-                                        style={{ height: "7vh", minWidth: "22vw", fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }} />
+                                        style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }} />
 
-                                    <button className="btn" type="submit">
+                                    <button className="btn border-0" type="button">
                                         <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Flupa.png?alt=media&token=8be363ff-d2c3-4856-9c00-8c722dec1f18" style={{ width: '35px', height: 'auto' }} className="hover-effect"></img>
                                     </button>
                                 </div>
@@ -452,12 +450,12 @@ function Store() {
 
                 <div className="d-flex justify-content-end btn-lg mt-2 mb-2" style={{ marginRight: "1vw", fontFamily: 'Open Sans, sans-serif', fontWeight: 300 }}>
                     <button
-                        className="btn border-0 p-1"
+                        className="btn border-0"
                         onClick={() => setShowCartModal(true)}
                         style={{ fontSize: '20px', fontWeight: 'bold' }}
                     >
                         {cartTotal > 0 && <span className="small">Total: ${cartTotal.toFixed(2)}</span>
-                        } <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Fcarro.png?alt=media&token=37ee4dae-aead-442c-83a3-7f18b6545973" style={{ width: '55px', height: '46px' }} className="hover-effect"></img>
+                        } <img src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Fcarro.png?alt=media&token=37ee4dae-aead-442c-83a3-7f18b6545973" style={{ width: '50px', height: '50px' }} className="hover-effect"></img>
                         <span className="translate-middle badge rounded-pill bg-danger" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300 }}>
                             {cartItems.length}
                         </span>
@@ -550,6 +548,8 @@ function Store() {
                     </Modal.Body>
                 </Modal>
             </main>
+            <Whatsapp />
+            <ScrollButton />
             <Footer />
         </>
     );

@@ -5,7 +5,7 @@
 }
 
 header {
-  margin-bottom: 12vh;
+  margin-bottom: 14vh;
 }
 
 main {
@@ -17,7 +17,12 @@ main {
 }
 
 .custom-navbar {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
+}
+
+#search-input {
+  min-width: 22vw;
+  min-height: 4vh;
 }
 
 .logo_menu {
@@ -26,6 +31,18 @@ main {
 
 .tienda {
   background-color: #e62ea6;
+}
+
+.productosend {
+  min-width: 25vw;
+}
+
+.productocart {
+  min-width: 35vw;
+}
+
+.cantidadcart {
+  min-width: 11vw;
 }
 
 .contacto {
@@ -74,26 +91,45 @@ main {
   transform: scale(1);
 }
 
-@media only screen and (min-width: 991px) and (max-width:1250px) {
+@media only screen and (min-width: 991px) and (max-width:1269px) {
+
   .check {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: center;
+    justify-content: center;
+  }
+
+  #search-input {
+    min-width: 32vw;
+    min-height: 4vh;
+  }
+
+  .productocart {
+    min-width: 20vw;
+  }
+
+  .cantidadcart {
+    min-width: 12vw;
   }
 }
 
 @media only screen and (min-width: 700px) and (max-width:990px) {
 
+  #search-input {
+    min-width: 32vw;
+    min-height: 4vh;
+  }
+
+  .check {
+    margin-top: 10vw;
+    justify-content: center;
+  }
+
   .logo_menu {
     width: 220px;
   }
 
-  .check {
+  .amount {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: center;
   }
 
   .product-quantity-input {
@@ -101,38 +137,47 @@ main {
     flex-wrap: wrap;
   }
 
-  .producto {
+  .productocart {
     min-width: 35vw;
   }
 
-  .cantidad {
-    min-width: 15vw;
+  .card-title {
+    min-height: 15vh;
   }
 
+  .cantidadcart {
+    min-width: 16vw;
+  }
 }
 
-@media only screen and (min-width: 320px) and (max-width:699px) {
-  
-  header {
-    margin-bottom: 15vh;
+@media only screen and (min-width: 320px) and (max-width:669px) {
+
+  .check {
+    justify-content: center;
+  }
+
+  .amount {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .logo_menu {
     width: 220px;
   }
 
-  .check {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: center;
+  .card-title {
+    min-height: 14vh;
   }
 
-  .producto {
+  .productosend {
     min-width: 35vw;
   }
 
-  .cantidad {
-    min-width: 26vw;
+  .productocart {
+    min-width: 55vw;
+  }
+
+  .cantidadcart {
+    min-width: 35vw;
   }
 }

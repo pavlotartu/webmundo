@@ -118,8 +118,8 @@ const Carrito: React.FC<CarritoProps> = ({
                 <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                   <th className="text-center">Código</th>
                   <th className="text-center">Imagen</th>
-                  <th className="producto col-md-8">Producto</th>
-                  <th className="cantidad col-md-2 text-center">Cantidad</th>
+                  <th className="productocart col-md-8">Producto</th>
+                  <th className="cantidadcart col-md-2 text-center">Cantidad</th>
                   <th className="text-center">Precio</th>
                   <th className=" text-center">Total</th>
                   <th className="text-center">Acciones</th>
@@ -162,6 +162,7 @@ const Carrito: React.FC<CarritoProps> = ({
                             -
                           </button>
                           <input
+
                             type="text"
                             inputMode="numeric"
                             pattern="[0-9]*"

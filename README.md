@@ -1027,7 +1027,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                         <thead>
                             <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                                 <th className="text-center">Código</th>
-                                <th>Producto</th>
+                                <th className="productosend">Producto</th>
                                 <th className="text-center">Cantidad</th>
                                 <th className="text-end">Precio</th>
                                 <th className="text-end">Subtotal</th>
@@ -1040,16 +1040,16 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                                     <td>{item.name}</td>
                                     <td className="text-center">{item.quantity}</td>
                                     <td className="text-end">${item.price.toFixed(2)}</td>
-
                                     <td className="text-end">${(item.price * item.quantity).toFixed(2)}</td>
-
                                 </tr>
+                            ))}
+                        </tbody>
                             ))}
                         </tbody>
                         <tfoot>
                             <tr style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
-                                <td colSpan={4}></td>
-                                <td>
+                                <td colSpan={3}></td>
+                                <td colSpan={2}>
                                     <strong>
                                         Total: $
                                         {cartItems

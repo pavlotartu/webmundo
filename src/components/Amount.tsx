@@ -49,8 +49,8 @@ const Amount: React.FC<AmountProps> = ({ selectedProductId, cartItems, setCartIt
   };
 
   return (
-    <div className="product-quantity-input">
-      <div className="input-group m-2">
+    <div className="amount product-quantity-input">
+      <div className="input-group m-2" style={{minWidth:"8vw"}}>
         <button
           className="btn btn-outline-secondary btn-sm"
           type="button"

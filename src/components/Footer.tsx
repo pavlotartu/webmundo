@@ -5,16 +5,6 @@ const Footer = () => {
                 <div className="row ">
                     <div>
                         <a
-                            href="https://api.whatsapp.com/send?phone=543498404539"
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            <img
-                                src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Fwhatsapp.png?alt=media&token=1a84b750-a07c-47e3-83a0-88d4061f61a1"
-                                alt="Icono 1"
-                                className="hover-effect img-fluid m-2"
-                                style={{ width: "30px", height: "auto" }} />
-                        </a>
-                        <a
                             href="https://www.instagram.com/cotillonmundoaventura/"
                             target="_blank"
                             rel="noopener noreferrer">

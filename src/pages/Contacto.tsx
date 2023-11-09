@@ -32,13 +32,13 @@ function Contacto() {
       <Navbar />
       <main>
         <div className="d-flex flex-wrap justify-content-center">
-          <div className="d-flex flex-wrap justify-content-center m-2">
+          <div className="d-flex flex-wrap justify-content-center">
             <div
               className="tienda card text-center m-2"
               style={{ width: "18rem" }}
             >
               <div className="card-body shadow-lg">
-                <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+                <h5 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                   <strong>WHATSAPP</strong>
                 </h5>
                 <a
@@ -53,8 +53,8 @@ function Contacto() {
                     style={{ width: "50px", height: "auto" }}
                   />
                 </a>
-                <h6 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>(0) 3498 - (15) 404539</h6>
-                <h6 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>Y sigue nuestros estados</h6>
+                <h6  style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>(0) 3498 - (15) 404539</h6>
+                <h6  style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>Y sigue nuestros estados</h6>
               </div>
             </div>
             <div
@@ -62,7 +62,7 @@ function Contacto() {
               style={{ width: "18rem" }}
             >
               <div className="card-body">
-                <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+                <h5 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                   <strong>INSTAGRAM</strong>
                 </h5>
                 <a
@@ -78,18 +78,18 @@ function Contacto() {
                   />
                   <strong>www.instagram.com/cotillonmundoaventura</strong>
                 </a>
-                <h6 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>#️⃣cotillonmundoaventura</h6>
+                <h6 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>#️⃣cotillonmundoaventura</h6>
               </div>
             </div>
           </div>
 
-          <div className="d-flex flex-wrap justify-content-center m-2">
+          <div className="d-flex flex-wrap justify-content-center ">
             <div
               className="pagos card text-center m-2 shadow-lg"
               style={{ width: "18rem" }}
             >
               <div className="card-body">
-                <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+                <h5 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                   <strong>FACEBOOK</strong>
                 </h5>
                 <a
@@ -106,7 +106,7 @@ function Contacto() {
                   />
                   <strong>www.facebook.com/cotillonmundoaventura</strong>
                 </a>
-                <h6 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>#️⃣cotillonmundoaventura</h6>
+                <h6  style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>#️⃣cotillonmundoaventura</h6>
               </div>
             </div>
 
@@ -115,7 +115,7 @@ function Contacto() {
               style={{ width: "18rem" }}
             >
               <div className="card-body">
-                <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+                <h5  style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                   <strong>EMAIL</strong>
                 </h5>
                 <a href="mailto:cotillonmundoaventura@gmail.com" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
@@ -153,7 +153,7 @@ function Contacto() {
       </main>
 
       <Footer />
-      
+
     </>
   );
 }

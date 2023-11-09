@@ -10,12 +10,11 @@ function CustomNavbar() {
     const isContactoActive = location.pathname === '/contacto';
 
     return (
-
         <header>
-         <Navbar className="custom-navbar fixed-top position-top" expand="lg">
+            <Navbar className="custom-navbar fixed-top position-top" expand="lg">
                 <Container>
                     <Navbar.Brand as={Link} to="/">
-                        <img className='logo_menu' src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Flogomundo.png?alt=media&token=7fd40388-ac85-4d2c-9b1c-6a0dafae6f26" alt="Logo"/>
+                        <img className='logo_menu border-0' src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Ficon%2Flogomundo.png?alt=media&token=7fd40388-ac85-4d2c-9b1c-6a0dafae6f26" alt="Logo" />
                     </Navbar.Brand>
 
                     <Navbar.Toggle aria-controls="navbarNav" />

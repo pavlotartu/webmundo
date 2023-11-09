@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import ScrollButton from '../components/ScrollButton';
+import Whatsapp from "../components/Whatsapp"
 
 function Home() {
 
@@ -63,7 +64,7 @@ function Home() {
             style={{ width: "18rem" }}
           >
             <div className="card-body ">
-              <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+              <h5 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>TIENDA ONLINE</strong>
               </h5>
               <p className="card-text" style={{ textAlign: 'justify', fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
@@ -80,7 +81,7 @@ function Home() {
             style={{ width: "18rem" }}
           >
             <div className="card-body">
-              <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+              <h5 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>MEDIOS DE CONTACTO</strong>
               </h5>
               <p className="card-text" style={{ textAlign: 'justify', fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
@@ -94,7 +95,7 @@ function Home() {
           </div>
           <div className="pagos card text-center shadow-lg m-2" style={{ width: "18rem" }}>
             <div className="card-body">
-              <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+              <h5 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>¿COMO COMPRAR?</strong>
               </h5>
               <p className="card-text" style={{ textAlign: 'justify', fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
@@ -110,7 +111,7 @@ function Home() {
             style={{ width: "18rem" }}
           >
             <div className="card-body">
-              <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+              <h5 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>MEDIOS DE PAGO</strong>
               </h5>
               <p className="card-text" style={{ textAlign: 'justify', fontFamily: 'Open Sans, sans-serif', fontWeight: 400, fontStyle: 'italic' }}>
@@ -199,7 +200,7 @@ function Home() {
                 </a>
               </div>
               <div className="card-body shadow-lg">
-                <h5 className="card-title text-center" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>COTILLON</h5>
+                <h5 className="text-center" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>COTILLON</h5>
                 <p className="card-text" style={{ textAlign: 'justify', fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
                   Aqui podes ver algunos de los ultimos ingresos en Cotillón.
                   Para poder ver mas productos o realizar una comprar, dirigite
@@ -280,7 +281,7 @@ function Home() {
                 </a>
               </div>
               <div className="card-body shadow-lg">
-                <h5 className="card-title text-center" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>JUGUETES</h5>
+                <h5 className="text-center" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>JUGUETES</h5>
                 <p className="card-text" style={{ textAlign: 'justify', fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
                   Aqui podes ver algunos de los ultimos ingresos en artículos de
                   jugueteria. Para poder ver mas productos o realizar una
@@ -361,7 +362,7 @@ function Home() {
                 </a>
               </div>
               <div className="card-body shadow-lg">
-                <h5 className="card-title text-center" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>REGALERIA</h5>
+                <h5 className="text-center" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>REGALERIA</h5>
                 <p className="card-text" style={{ textAlign: 'justify', fontFamily: 'Open Sans, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
                   Aqui podes ver algunos de los ultimos ingresos en artículos de
                   regaleria. Para poder ver mas productos o realizar una
@@ -416,7 +417,7 @@ function Home() {
             style={{ width: "18rem" }}
           >
             <div className="card-body ">
-              <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+              <h5 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>BILLETERA SANTA FE</strong>
               </h5>
               <p className="card-text" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
@@ -431,7 +432,7 @@ function Home() {
           </div>
           <div className="contacto card text-center shadow-lg m-2" style={{ width: "18rem" }}>
             <div className="card-body">
-              <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+              <h5 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>MERCADOPAGO</strong>
               </h5>
               <p className="card-text" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
@@ -476,7 +477,7 @@ function Home() {
             style={{ width: "18rem" }}
           >
             <div className="card-body">
-              <h5 className="card-title" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+              <h5 style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>TARJETAS DE DEBITO</strong>
               </h5>
               <img className="rounded img-thumbnail" src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fdebito.png?alt=media&token=af8e8d28-7724-4999-9558-aa60b9eafb87" alt="tard" style={{
@@ -484,7 +485,7 @@ function Home() {
                 height: "50px",
                 objectFit: "unset",
               }} />
-              <h5 className="card-title mt-4" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
+              <h5 className="mt-4" style={{ fontFamily: 'Open Sans, sans-serif', fontWeight: 400 }}>
                 <strong>TARJETAS DE CREDITO</strong>
               </h5>
               <img className="rounded img-thumbnail" src="https://firebasestorage.googleapis.com/v0/b/mundoaventura-723d7.appspot.com/o/src_img%2Fnews%2Fcredito.png?alt=media&token=a4ed00fd-7034-44d8-b8b9-9b7a0d79c1a9" alt="tarc" style={{
@@ -523,8 +524,8 @@ function Home() {
             />
           </Modal.Body>
         </Modal>
-
       </main>
+      <Whatsapp />
       <Footer />
     </>
   );
