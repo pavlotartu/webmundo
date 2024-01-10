@@ -37,5 +37,7 @@ export const getArticlesData = async () => {
         }
     });
 
+    articlesData.sort((a, b) => a.name.localeCompare(b.name));
+
     return articlesData;
 };

@@ -84,7 +84,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
             total: total
         };
 
-/* credenciales */
+/* credencailes */
 
         emailjs.send(serviceID, templateID, emailParams)
             .then(() => {
@@ -253,7 +253,7 @@ const Send: React.FC<SendProps> = ({ cartItems, showModal, closeModal }) => {
                 <div className="d-flex flex-column align-items-end">
                     <ReCAPTCHA
                         className="m-1"
-                        sitekey="/* credenciales */"
+                        sitekey=""
                         onChange={handleRecaptchaChange}
                     />
 

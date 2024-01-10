@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Article } from "./Key";
 
 interface AmountProps {
@@ -10,6 +10,17 @@ interface AmountProps {
 
 const Amount: React.FC<AmountProps> = ({ selectedProductId, cartItems, setCartItems, articles }) => {
   const [quantity, setQuantity] = useState<number>(1);
+  const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (showConfirmation) {
+      const timeout = setTimeout(() => {
+        setShowConfirmation(false);
+      }, 2000); 
+
+      return () => clearTimeout(timeout);
+    }
+  }, [showConfirmation]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newQuantity = parseInt(event.target.value);
@@ -45,12 +56,18 @@ const Amount: React.FC<AmountProps> = ({ selectedProductId, cartItems, setCartIt
         cantidadesArticulosCarrito[selectedProductId] = quantity;
         localStorage.setItem("cantidadesArticulosCarrito", JSON.stringify(cantidadesArticulosCarrito));
       }
+
+      setShowConfirmation(true);
     }
   };
 
   return (
-    <div className="amount product-quantity-input">
-      <div className="input-group m-2" style={{minWidth:"8vw"}}>
+    <div className="amount product-quantity-input" style={{ position: 'relative' }}>
+      <div className="text-center align-top" style={{ color: "green", position: 'absolute', bottom: '85%', left: '50%', transform: 'translateX(-50%)', zIndex: '1', display: showConfirmation ? 'block' : 'none' }}>
+        ¡Agregado!
+      </div>
+
+      <div className="input-group m-2" style={{ minWidth: "8vw" }}>
         <button
           className="btn btn-outline-secondary btn-sm"
           type="button"
